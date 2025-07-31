@@ -175,7 +175,7 @@ export function SelectHotelProductItem({
         if (resData === null)
           throw new Error('no resData');
         const roomDescriptions = resData?.roomDescriptions;
-        if (!roomDescriptions?.length || roomDescriptions?.length )
+        if (!roomDescriptions?.length || roomDescriptions?.length <= 0 )
           throw new Error('no roomDescription');
         const firstRoom = (roomDescriptions?.sort((a, b) => (a?.price || 0) - (b.price || 0)))[0];
         if (
