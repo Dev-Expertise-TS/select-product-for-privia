@@ -25,11 +25,12 @@ npx tailwindcss init -p
 npm install next react react-dom lucide-react
 ```
 
-### 2. 환경 변수 설정
+### 2. 필수 환경 변수 설정
 ```bash
-# .env.local
+# .env
 NEXT_PUBLIC_SABRE_API_BASE=https://your-sabre-api-endpoint.com
 ```
+위 환경변수가 올바른 값으로 정확히 설정되어 있어야만 합니다.
 
 ## 사용 방법
 
