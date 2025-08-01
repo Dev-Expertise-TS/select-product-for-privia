@@ -105,17 +105,45 @@ import { SelectHotelProductItem } from './dist/select-hotel-product-widget.es.js
 
 ## 🚀 사용 방법
 
-빌드된 번들은 **React 컴포넌트와 웹 컴포넌트를 모두 지원**합니다. 프로젝트 상황에 따라 적절한 방식을 선택하세요.
+이 프로젝트는 세 가지 형태의 번들을 제공합니다:
+1. **스탠드얼론 웹 컴포넌트** - 모든 의존성이 포함된 독립 실행형
+2. **React 컴포넌트 모듈** - React 애플리케이션용 경량 모듈
+3. **통합 번들** - React와 웹 컴포넌트가 모두 포함된 하위 호환용
 
-### 방법 1: 빌드된 번들에서 React 컴포넌트 사용하기
+### 📁 번들 위치 및 용도
 
-빌드된 번들에는 React 컴포넌트가 포함되어 있어, React 프로젝트에서 직접 import할 수 있습니다.
+```
+dist/
+├── webcomponent/                    # 스탠드얼론 웹 컴포넌트
+│   ├── select-hotel-product-widget-standalone.es.js   # ES 모듈 (모든 의존성 포함)
+│   ├── select-hotel-product-widget-standalone.umd.js  # UMD 모듈 (모든 의존성 포함)
+│   └── style.css                                      # 스타일시트
+├── react/                           # React 컴포넌트 모듈
+│   ├── select-hotel-product-item.es.js    # ES 모듈 (React 제외)
+│   ├── select-hotel-product-item.cjs.js   # CommonJS 모듈 (React 제외)
+│   └── index.d.ts                         # TypeScript 타입 정의
+└── (루트)                           # 통합 번들
+    ├── select-hotel-product-widget.es.js   # ES 모듈 (React 포함, 웹컴포넌트 자동 등록)
+    ├── select-hotel-product-widget.umd.js  # UMD 모듈 (React 포함, 웹컴포넌트 자동 등록)
+    └── style.css                           # 스타일시트
+```
+
+## 📦 React 컴포넌트 사용 방법
+
+### 방법 1: React 전용 모듈 사용 (권장)
+
+React 애플리케이션에서는 경량화된 React 전용 모듈을 사용하세요:
 
 ```tsx
-// ES Module 번들에서 React 컴포넌트 import
-import { SelectHotelProductItem } from './dist/select-hotel-product-widget.es.js';
-// CSS도 함께 import
+// ✅ React 전용 모듈 import (React를 peer dependency로 요구)
+import { SelectHotelProductItem } from './dist/react/select-hotel-product-item.es.js';
+// 또는 CommonJS 환경에서
+const { SelectHotelProductItem } = require('./dist/react/select-hotel-product-item.cjs.js');
+
+// CSS는 별도로 import (웹 컴포넌트와 공유)
 import './dist/style.css';
+// 또는
+import './dist/webcomponent/style.css';
 
 export default function HotelPage() {
   return (
@@ -131,75 +159,49 @@ export default function HotelPage() {
 
 #### TypeScript 지원
 
-TypeScript 프로젝트에서는 타입 정의도 사용할 수 있습니다:
-
 ```tsx
-// 타입 정의 import
-import type { SelectHotelProductItemProps } from './dist/select-hotel-product-widget';
-
-// 컴포넌트와 함께 사용
-import { SelectHotelProductItem } from './dist/select-hotel-product-widget.es.js';
+// TypeScript 타입 정의
+import type { SelectHotelProductItemProps } from './dist/react/index.d.ts';
+// 또는 자동 추론
+import { SelectHotelProductItem } from './dist/react/select-hotel-product-item.es.js';
 ```
 
-### 방법 2: 소스 코드에서 React 컴포넌트 직접 사용하기
+#### NPM 패키지로 사용시
 
-개발 중이거나 더 세밀한 제어가 필요한 경우:
+```tsx
+// NPM에 배포된 경우
+import { SelectHotelProductItem } from 'select-hotel-product-widget/react';
+import 'select-hotel-product-widget/dist/style.css';
+```
+
+### 방법 2: 통합 번들에서 React 컴포넌트 사용
+
+하위 호환성이 필요한 경우 통합 번들을 사용할 수 있습니다:
+
+```tsx
+// ⚠️ 통합 번들 사용 (React 포함, 웹 컴포넌트도 자동 등록됨)
+import { SelectHotelProductItem } from './dist/select-hotel-product-widget.es.js';
+import './dist/style.css';
+
+// 주의: 이 방법은 웹 컴포넌트도 함께 등록되므로 번들 크기가 큽니다
+```
+
+### 방법 3: 소스 코드에서 직접 사용 (개발용)
+
+개발 중이거나 커스터마이징이 필요한 경우:
 
 ```tsx
 // 소스에서 직접 import
 import { SelectHotelProductItem } from './src/components/select-hotel-product-item';
 import './src/globals.css';
-
-// 사용법은 동일
-<SelectHotelProductItem sabreId={383336} checkIn="2025-08-15" />
 ```
 
-### 방법 3: NPM 패키지로 설치 후 사용 (패키지 배포 시)
+## 🌐 웹 컴포넌트 사용 방법
 
-```bash
-# 패키지 설치
-npm install @your-org/select-hotel-product-widget
+### 방법 1: 스탠드얼론 웹 컴포넌트 사용 (권장)
 
-# React 컴포넌트로 사용
-import { SelectHotelProductItem } from '@your-org/select-hotel-product-widget';
-import '@your-org/select-hotel-product-widget/dist/style.css';
-```
+모든 의존성이 포함된 독립 실행형 번들로, 별도의 React 설치가 필요 없습니다:
 
-## 📦 웹 컴포넌트 사용방법
-
-웹 컴포넌트는 프레임워크에 독립적으로 작동하며, 순수 HTML/JavaScript 환경에서도 사용할 수 있습니다.
-
-### 방법 1: CDN을 통한 사용
-
-가장 간단한 방법으로, CDN URL을 통해 직접 로드합니다:
-
-```html
-<!DOCTYPE html>
-<html>
-<head>
-  <!-- CSS 스타일 포함 -->
-  <link rel="stylesheet" href="https://cdn.example.com/select-hotel-product-widget/style.css">
-</head>
-<body>
-  <!-- 웹 컴포넌트 사용 -->
-  <select-hotel-product 
-    sabre-id="383336"
-    check-in="2025-08-15"
-    nights="2"
-    num-of-people="2">
-  </select-hotel-product>
-
-  <!-- 웹 컴포넌트 스크립트 로드 -->
-  <script type="module" src="https://cdn.example.com/select-hotel-product-widget.es.js"></script>
-</body>
-</html>
-```
-
-### 방법 2: 로컬 파일 사용
-
-빌드된 파일을 프로젝트에 포함시켜 사용:
-
-#### 스탠드얼론 버전 (권장 - 의존성 설치 불필요)
 ```html
 <!DOCTYPE html>
 <html>
@@ -216,25 +218,45 @@ import '@your-org/select-hotel-product-widget/dist/style.css';
     num-of-people="2">
   </select-hotel-product>
 
-  <!-- 스탠드얼론 웹 컴포넌트 로드 (모든 의존성 포함) -->
+  <!-- 스탠드얼론 웹 컴포넌트 로드 (React 포함) -->
+  <!-- ES 모듈 (모던 브라우저) -->
   <script type="module" src="./dist/webcomponent/select-hotel-product-widget-standalone.es.js"></script>
   
-  <!-- 또는 레거시 브라우저 지원 -->
+  <!-- 또는 UMD (레거시 브라우저 지원) -->
   <!-- <script src="./dist/webcomponent/select-hotel-product-widget-standalone.umd.js"></script> -->
 </body>
 </html>
 ```
 
-#### NPM 패키지 버전 (React가 이미 있는 경우)
+### 방법 2: CDN을 통한 사용
+
+CDN에 배포된 경우:
+
 ```html
-<!-- React와 ReactDOM이 이미 로드되어 있어야 함 -->
-<link rel="stylesheet" href="./node_modules/select-hotel-item/dist/style.css">
-<script type="module">
-  import './node_modules/select-hotel-item/dist/select-hotel-product-widget.es.js';
-</script>
+<!-- CSS -->
+<link rel="stylesheet" href="https://cdn.example.com/select-hotel-product-widget/webcomponent/style.css">
+
+<!-- 스탠드얼론 웹 컴포넌트 -->
+<script type="module" src="https://cdn.example.com/select-hotel-product-widget/webcomponent/select-hotel-product-widget-standalone.es.js"></script>
 ```
 
-### 방법 3: JavaScript 프레임워크에서 웹 컴포넌트 사용
+### 방법 3: 통합 번들 사용 (React 환경)
+
+React가 이미 로드된 환경에서는 더 작은 통합 번들을 사용할 수 있습니다:
+
+```html
+<!-- React와 ReactDOM이 이미 로드되어 있어야 함 -->
+<script crossorigin src="https://unpkg.com/react@19/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@19/umd/react-dom.production.min.js"></script>
+
+<!-- CSS -->
+<link rel="stylesheet" href="./dist/style.css">
+
+<!-- 통합 번들 (React 제외) -->
+<script src="./dist/select-hotel-product-widget.umd.js"></script>
+```
+
+### 방법 4: JavaScript 프레임워크에서 웹 컴포넌트 사용
 
 #### Vue.js에서 사용
 ```vue
@@ -248,8 +270,9 @@ import '@your-org/select-hotel-product-widget/dist/style.css';
 </template>
 
 <script>
-import 'path/to/select-hotel-product-widget.es.js';
-import 'path/to/style.css';
+// 스탠드얼론 웹 컴포넌트 import
+import '@/dist/webcomponent/select-hotel-product-widget-standalone.es.js';
+import '@/dist/webcomponent/style.css';
 
 export default {
   data() {
@@ -266,20 +289,26 @@ export default {
 ```typescript
 // app.module.ts
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import 'path/to/select-hotel-product-widget.es.js';
+// 스탠드얼론 웹 컴포넌트 import
+import 'dist/webcomponent/select-hotel-product-widget-standalone.es.js';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
+// styles.css에 추가
+@import 'dist/webcomponent/style.css';
+
 // component.html
 <select-hotel-product 
   sabre-id="383336"
-  check-in="2025-08-15">
+  check-in="2025-08-15"
+  nights="2"
+  num-of-people="2">
 </select-hotel-product>
 ```
 
-### 방법 4: 동적 생성 및 이벤트 처리
+### 방법 5: 동적 생성 및 이벤트 처리
 
 ```javascript
 // 웹 컴포넌트 동적 생성
@@ -533,28 +562,52 @@ select-product-for-privia/
    - `dist/` 폴더의 파일들을 웹 서버에 업로드
    - 적절한 CORS 헤더 설정 필요
 
+## 📊 번들 선택 가이드
+
+### 어떤 번들을 사용해야 할까요?
+
+| 사용 환경 | 권장 번들 | 경로 | 크기 | 특징 |
+|----------|-----------|------|------|------|
+| 순수 HTML/Vanilla JS | 스탠드얼론 웹 컴포넌트 | `dist/webcomponent/` | ~300KB | React 포함, 의존성 없음 |
+| React 애플리케이션 | React 모듈 | `dist/react/` | ~13KB | React 제외, 가장 작음 |
+| 기존 프로젝트 (하위 호환) | 통합 번들 | `dist/` | ~841KB | React + 웹컴포넌트 |
+| Vue.js / Angular | 스탠드얼론 웹 컴포넌트 | `dist/webcomponent/` | ~300KB | 프레임워크 독립적 |
+
+### Import 경로 정리
+
+```javascript
+// 1. React 컴포넌트 (React 앱용)
+import { SelectHotelProductItem } from './dist/react/select-hotel-product-item.es.js';
+
+// 2. 웹 컴포넌트 (브라우저용)
+<script src="./dist/webcomponent/select-hotel-product-widget-standalone.umd.js"></script>
+
+// 3. 통합 번들 (하위 호환용)
+import { SelectHotelProductItem } from './dist/select-hotel-product-widget.es.js';
+```
+
 ## 🔍 트러블슈팅 가이드
 
 ### 일반적인 문제 해결
 
 #### 1. "Failed to resolve module specifier 'react'" 에러
 
-**증상**: ES 모듈로 웹 컴포넌트를 로드할 때 React 의존성 에러 발생
+**증상**: 웹 컴포넌트 로드 시 React 의존성 에러
 
 **해결 방법**:
 ```html
-<!-- 스탠드얼론 버전 사용 (권장) -->
-<script type="module" src="./dist/webcomponent/select-hotel-product-widget-standalone.es.js"></script>
+<!-- ❌ 잘못된 방법: 통합 번들은 React가 필요함 -->
+<script type="module" src="./dist/select-hotel-product-widget.es.js"></script>
 
-<!-- 이 버전은 모든 의존성이 포함되어 있어 별도의 React 설치가 필요 없음 -->
+<!-- ✅ 올바른 방법: 스탠드얼론 번들 사용 -->
+<script type="module" src="./dist/webcomponent/select-hotel-product-widget-standalone.es.js"></script>
 ```
 
-#### 2. 번들 선택 가이드
+#### 2. "process is not defined" 에러
 
-**사용 상황별 권장 번들**:
-- 순수 HTML에서 사용: 스탠드얼론 웹 컴포넌트 (`dist/webcomponent/`)
-- React 앱에서 사용: React 컴포넌트 모듈 (`dist/react/`)
-- 기존 프로젝트 호환성: 통합 번들 (`dist/`)
+**증상**: 브라우저에서 Node.js 전역 변수 에러
+
+**해결 방법**: 최신 빌드를 사용하세요. 이 문제는 이미 수정되었습니다.
 
 #### 3. 웹 컴포넌트가 렌더링되지 않음
 
