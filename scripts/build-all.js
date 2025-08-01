@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { execSync } from 'child_process';
-import fs from 'fs-extra';
+import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -13,8 +13,12 @@ async function buildAll() {
   try {
     // 1. Clean dist directories
     console.log('📦 Cleaning dist directories...');
-    await fs.remove(path.join(rootDir, 'dist'));
-    await fs.ensureDir(path.join(rootDir, 'dist'));
+    try {
+      await fs.rm(path.join(rootDir, 'dist'), { recursive: true, force: true });
+    } catch (e) {
+      // Directory might not exist
+    }
+    await fs.mkdir(path.join(rootDir, 'dist'), { recursive: true });
     
     // 2. Build standalone Web Component bundles
     console.log('\n🔧 Building standalone Web Component bundles...');
@@ -41,8 +45,8 @@ async function buildAll() {
     console.log('\n📄 Creating package.json files...');
     
     // Ensure directories exist
-    await fs.ensureDir(path.join(rootDir, 'dist/react'));
-    await fs.ensureDir(path.join(rootDir, 'dist/webcomponent'));
+    await fs.mkdir(path.join(rootDir, 'dist/react'), { recursive: true });
+    await fs.mkdir(path.join(rootDir, 'dist/webcomponent'), { recursive: true });
     
     // Main package.json in dist/
     const mainDistPackageJson = {
@@ -72,10 +76,9 @@ async function buildAll() {
         "react-dom": ">=16.8.0"
       }
     };
-    await fs.writeJson(
+    await fs.writeFile(
       path.join(rootDir, 'dist/package.json'), 
-      mainDistPackageJson, 
-      { spaces: 2 }
+      JSON.stringify(mainDistPackageJson, null, 2)
     );
     
     // React module package.json
@@ -90,10 +93,9 @@ async function buildAll() {
         "react-dom": ">=16.8.0"
       }
     };
-    await fs.writeJson(
+    await fs.writeFile(
       path.join(rootDir, 'dist/react/package.json'), 
-      reactPackageJson, 
-      { spaces: 2 }
+      JSON.stringify(reactPackageJson, null, 2)
     );
     
     // Web component package.json
@@ -104,10 +106,9 @@ async function buildAll() {
       module: "select-hotel-product-widget-standalone.es.js",
       description: "Standalone web component with all dependencies bundled"
     };
-    await fs.writeJson(
+    await fs.writeFile(
       path.join(rootDir, 'dist/webcomponent/package.json'), 
-      webComponentPackageJson, 
-      { spaces: 2 }
+      JSON.stringify(webComponentPackageJson, null, 2)
     );
     
     // 6. Create README files for each distribution
