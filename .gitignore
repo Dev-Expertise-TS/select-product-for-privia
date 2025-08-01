@@ -27,6 +27,7 @@ yarn-error.log*
 next-env.d.ts
 *storybook.log
 # (dist/storybook-static은 dist/ 규칙에 의해 이미 무시됨)
+storybook-static/
 
 # AI code assist
 CLAUDE.md
