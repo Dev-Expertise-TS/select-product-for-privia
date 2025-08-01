@@ -7,10 +7,16 @@
     "dev": "storybook dev -p 6006",
     "build": "node scripts/build-all.js",
     "build:widget": "vite build --config vite.config.build.ts",
+    "build:webcomponent": "vite build --config vite.config.webcomponent.ts",
+    "build:react": "vite build --config vite.config.react.ts",
     "build:storybook": "storybook build",
     "dev:widget": "vite",
     "preview": "vite preview",
-    "storybook": "storybook dev -p 6006"
+    "storybook": "storybook dev -p 6006",
+    "test:validate": "node tests/validation/validate-all.js",
+    "test:react": "node tests/validation/test-react-module.js",
+    "test:webcomponent": "node tests/validation/test-web-component.js",
+    "test:storybook": "node tests/validation/test-storybook-build.js"
   },
   "dependencies": {
     "@r2wc/react-to-web-component": "^2.0.3",
@@ -30,6 +36,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^4.3.3",
+    "fs-extra": "^11.3.0",
     "lit": "^3.3.1",
     "postcss": "^8.5",
     "storybook": "9.1.0",

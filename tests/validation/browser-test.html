@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Product Component Browser Test</title>
+  <link rel="stylesheet" href="../../dist/webcomponent/style.css">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: #f5f5f5;
+    }
+    .test-section {
+      margin-bottom: 40px;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .test-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .test-case {
+      margin-bottom: 30px;
+      padding: 15px;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+    }
+    .test-case h3 {
+      margin-top: 0;
+      color: #555;
+    }
+    .status {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    .status.loading {
+      background: #fff3cd;
+      color: #856404;
+    }
+    .status.success {
+      background: #d4edda;
+      color: #155724;
+    }
+    .status.error {
+      background: #f8d7da;
+      color: #721c24;
+    }
+    #console {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 15px;
+      border-radius: 4px;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 14px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    .console-log {
+      margin-bottom: 5px;
+    }
+    .console-error {
+      color: #ff6b6b;
+    }
+    .console-success {
+      color: #51cf66;
+    }
+  </style>
+</head>
+<body>
+  <h1>호텔 상품 컴포넌트 브라우저 테스트</h1>
+  
+  <div class="test-section">
+    <h2 class="test-title">1. 웹 컴포넌트 테스트</h2>
+    
+    <div class="test-case">
+      <h3>기본 렌더링 테스트</h3>
+      <select-hotel-product
+        id="test-wc-1"
+        sabre-id="383336"
+        check-in="2025-08-12"
+        nights="1"
+        num-of-people="2">
+      </select-hotel-product>
+      <p>상태: <span class="status loading" id="status-wc-1">로딩중...</span></p>
+    </div>
+  </div>
+  
+  <div class="test-section">
+    <h2 class="test-title">2. React 컴포넌트 테스트 (React 환경에서)</h2>
+    <div id="react-root"></div>
+  </div>
+  
+  <div class="test-section">
+    <h2 class="test-title">3. 테스트 콘솔</h2>
+    <div id="console"></div>
+  </div>
+  
+  <!-- Standalone Web Component Bundle (includes all dependencies) -->
+  <script src="../../dist/webcomponent/select-hotel-product-widget-standalone.umd.js"></script>
+  
+  <!-- Test Scripts -->
+  <script>
+    const consoleDiv = document.getElementById('console');
+    
+    function log(message, type = 'log') {
+      const div = document.createElement('div');
+      div.className = `console-log console-${type}`;
+      div.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+      consoleDiv.appendChild(div);
+      consoleDiv.scrollTop = consoleDiv.scrollHeight;
+    }
+    
+    // 웹 컴포넌트 테스트
+    window.addEventListener('DOMContentLoaded', () => {
+      log('DOM Content Loaded', 'success');
+      
+      // 웹 컴포넌트 등록 확인
+      const isRegistered = customElements.get('select-hotel-product') !== undefined;
+      log(`Web component registered: ${isRegistered}`, isRegistered ? 'success' : 'error');
+      
+      // 컴포넌트 상태 확인
+      setTimeout(() => {
+        const wc1 = document.getElementById('test-wc-1');
+        const wc2 = document.getElementById('test-wc-2');
+        
+        // 컴포넌트 1 체크
+        if (wc1) {
+          const hasContent = wc1.innerHTML.length > 0 || wc1.shadowRoot !== null;
+          const status1 = document.getElementById('status-wc-1');
+          if (hasContent) {
+            status1.textContent = '렌더링 성공';
+            status1.className = 'status success';
+            log('Web component 1 rendered successfully', 'success');
+          } else {
+            status1.textContent = '렌더링 실패';
+            status1.className = 'status error';
+            log('Web component 1 render failed', 'error');
+          }
+        }
+        
+        // 컴포넌트 2 체크
+        if (wc2) {
+          const hasContent = wc2.innerHTML.length > 0 || wc2.shadowRoot !== null;
+          const status2 = document.getElementById('status-wc-2');
+          if (hasContent) {
+            status2.textContent = '렌더링 성공';
+            status2.className = 'status success';
+            log('Web component 2 rendered successfully', 'success');
+          } else {
+            status2.textContent = '렌더링 실패';
+            status2.className = 'status error';
+            log('Web component 2 render failed', 'error');
+          }
+        }
+      }, 2000);
+    });
+    
+    // 속성 변경 함수
+    function changeAttributes() {
+      const wc2 = document.getElementById('test-wc-2');
+      if (wc2) {
+        wc2.setAttribute('sabre-id', '999999');
+        wc2.setAttribute('nights', '7');
+        wc2.setAttribute('num-of-people', '1');
+        log('Attributes changed for component 2', 'success');
+      }
+    }
+    
+    // 에러 핸들링
+    window.addEventListener('error', (e) => {
+      log(`Error: ${e.message}`, 'error');
+    });
+  </script>
+</body>
+</html>

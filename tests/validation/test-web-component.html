@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Web Component Test</title>
+  <link rel="stylesheet" href="../../dist/webcomponent/style.css">
+  <style>
+    section.demo {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding: 12px;
+      max-width: 960px;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Web Component Test</h1>
+  <section class="demo">
+  <!-- Test 1: Basic web component -->
+  <select-hotel-product
+    sabre-id="383336"
+    check-in="2025-08-12"
+    nights="1"
+    num-of-people="2">
+  </select-hotel-product>
+
+  </section>
+  <script src="../../dist/webcomponent/select-hotel-product-widget-standalone.umd.js"></script>
+  <script>
+    // Test if component is registered
+    const isRegistered = customElements.get('select-hotel-product') !== undefined;
+    console.log('Web component registered:', isRegistered);
+    
+    // Test if component renders
+    setTimeout(() => {
+      const elements = document.querySelectorAll('select-hotel-product');
+      console.log('Found web components:', elements.length);
+      
+      // Check if shadow DOM or content is created
+      elements.forEach((el, index) => {
+        const hasContent = el.innerHTML.length > 0 || el.shadowRoot !== null;
+        console.log(`Component ${index + 1} has content: ${hasContent}`);
+      });
+    }, 1000);
+  </script>
+</body>
+</html>
