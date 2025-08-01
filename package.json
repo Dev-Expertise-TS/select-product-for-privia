@@ -10,7 +10,7 @@
     "build:webcomponent": "vite build --config vite.config.webcomponent.ts",
     "build:react": "vite build --config vite.config.react.ts",
     "build:storybook": "storybook build -o dist/storybook-static",
-    "build:storybook-only": "storybook build -o dist/storybook-static",
+    "build:storybook-only": "storybook build -o dist",
     "dev:widget": "vite",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
