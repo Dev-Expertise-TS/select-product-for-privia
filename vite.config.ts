@@ -1,10 +1,9 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
-import mockServerPlugin from './src/mock-server.js';
 
 export default defineConfig({
-  plugins: [react(), mockServerPlugin()],
+  plugins: [react()],
   
   // Development server settings
   server: {
@@ -15,7 +14,7 @@ export default defineConfig({
   // Build configuration for library mode
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/widget.tsx'),
+      entry: resolve(__dirname, 'src/components/select-hotel-product-item.web-component.ts'),
       name: 'SelectHotelProductWidget',
       fileName: (format) => `select-hotel-product-widget.${format}.js`,
       formats: ['es', 'umd']

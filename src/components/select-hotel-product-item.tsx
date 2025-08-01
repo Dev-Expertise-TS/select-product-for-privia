@@ -1,12 +1,10 @@
-'use client';
 import {
-  // Camera,
   Utensils,
   CreditCard,
   ArrowUpCircle,
   Clock
 } from 'lucide-react';
-import { useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useState } from 'react';
 
 const getValidDate = (date: Date | string) => {
   const _date = new Date(date);
@@ -66,11 +64,6 @@ const genSabreApiEp = ({
   }
 };
 
-type Benefit = {
-  icon: string | ReactNode;
-  benefit: string;
-};
-
 type SabreRoom = {
   price: number;
   roomCode: string;
@@ -125,7 +118,6 @@ export function SelectHotelProductItem({
       setIsLoading(true);
       try {
         const url = genSabreApiEp({ sabreId, checkIn, nights, numOfPeople });
-        console.log('Fetching URL:', url);
         
         const res = await fetch(url, {
           method: 'GET',
@@ -136,16 +128,11 @@ export function SelectHotelProductItem({
           mode: 'cors', // CORS 명시적 설정
         });
         
-        console.log('Response status:', res.status);
-        console.log('Response headers:', res.headers.get('content-type'));
-        
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
         }
         
         const text = await res.text();
-        console.log('Response text preview:', text.substring(0, 100));
-        
         const data = JSON.parse(text);
         setResData(data);
       } catch (err) {

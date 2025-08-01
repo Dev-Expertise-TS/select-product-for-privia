@@ -10,6 +10,79 @@
 - **반응형 디자인**: 모바일과 데스크톱 환경에서 최적화된 UI
 - **카카오톡 연동**: 고객 상담을 위한 카카오톡 통합
 
+## 🚀 개발 및 빌드
+
+### 통합 개발 환경 (Storybook)
+
+```bash
+# React 컴포넌트와 Web Component를 모두 Storybook에서 HMR로 개발
+pnpm dev
+```
+
+http://localhost:6006 에서 Storybook이 실행됩니다. React 컴포넌트와 Web Component 모두 실시간으로 수정사항이 반영됩니다.
+
+### 통합 빌드
+
+```bash
+# 모든 패키지를 한 번에 빌드
+pnpm build
+```
+
+이 명령어는 다음을 생성합니다:
+- `dist/select-hotel-product-widget.es.js` - ES Module 웹 컴포넌트
+- `dist/select-hotel-product-widget.umd.js` - UMD 웹 컴포넌트
+- `dist/select-hotel-product-item.tsx` - React 컴포넌트 소스
+- `dist/index.js` - CommonJS 모듈
+- `dist/*.d.ts` - TypeScript 선언 파일
+- `storybook-static/` - 호스팅 가능한 Storybook 정적 사이트
+
+## 🚀 사용 방법
+
+### React 프로젝트에서 사용하기
+
+React 프로젝트에서는 React 컴포넌트를 직접 import하여 사용할 수 있습니다.
+
+#### 1. 프로젝트 복제 후 의존성 설치
+
+```bash
+# 프로젝트를 하위 폴더로 복제
+git clone [repository-url] ./widgets/select-hotel-product
+
+# 또는 npm/yarn workspace에 추가
+```
+
+#### 2. React 컴포넌트 직접 사용
+
+```tsx
+import { SelectHotelProductItem } from './widgets/select-hotel-product/components/select-hotel-product-item';
+
+// 또는 widget.tsx에서 import (타입 정의 포함)
+import { SelectHotelProductItem } from './widgets/select-hotel-product/src/widget';
+
+export default function HotelPage() {
+  return (
+    <SelectHotelProductItem
+      sabreId={383336}
+      checkIn="2025-08-15"
+      nights={2}
+      numOfPeople="2"
+    />
+  );
+}
+```
+
+#### 3. 필수 설정
+
+React 프로젝트에서 사용 시 다음 설정이 필요합니다:
+
+- **Tailwind CSS**: 컴포넌트가 Tailwind CSS에 의존하므로 설정 필요
+- **스타일 import**: `app/globals.css` 파일의 스타일 필요
+
+```tsx
+// 스타일 import
+import './widgets/select-hotel-product/app/globals.css';
+```
+
 ## 📦 웹 컴포넌트 사용방법
 
 ### 1. 빌드된 파일 포함하기
@@ -60,33 +133,27 @@ document.body.appendChild(widget);
 pnpm install
 ```
 
-### 개발 서버 실행
+### 개발 명령어
 
 ```bash
-# 웹 컴포넌트 개발 서버 (http://localhost:5173)
-pnpm dev:widget
-
-# Next.js 개발 서버 (http://localhost:3000)
+# Storybook 개발 서버 (권장) - React & Web Component 모두 지원
 pnpm dev
+
+# 개별 개발 서버
+pnpm dev:widget    # Vite 개발 서버 (웹 컴포넌트)
+pnpm dev:next      # Next.js 개발 서버
+pnpm storybook     # Storybook 개발 서버
 ```
 
-## 🔨 빌드 방법
-
-### 웹 컴포넌트 빌드
+## 🔨 빌드 명령어
 
 ```bash
-pnpm build:widget
-```
-
-이 명령어는 다음 파일들을 생성합니다:
-- `dist/select-hotel-product-widget.es.js` - ES Module 형식
-- `dist/select-hotel-product-widget.umd.js` - UMD 형식 (레거시 지원)
-- `dist/style.css` - 스타일시트 (자동으로 컴포넌트에 포함됨)
-
-### Next.js 앱 빌드
-
-```bash
+# 통합 빌드 (권장) - 모든 형식 한 번에 빌드
 pnpm build
+
+# 개별 빌드
+pnpm build:widget     # 웹 컴포넌트만 빌드
+pnpm build:storybook  # Storybook 정적 사이트만 빌드
 ```
 
 ## 📋 API 속성
