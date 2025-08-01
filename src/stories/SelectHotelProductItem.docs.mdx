@@ -1,0 +1,59 @@
+import { Meta, Canvas, Controls, Primary, Stories } from '@storybook/addon-docs/blocks';
+import * as SelectHotelProductItemStories from './SelectHotelProductItem.stories';
+
+<Meta of={SelectHotelProductItemStories} />
+
+# SelectHotelProductItem
+
+호텔 상품을 선택하고 표시하는 React 컴포넌트입니다. Sabre API를 통해 실시간 가격 정보를 가져와 표시합니다.
+
+<Primary />
+
+## Props
+
+<Controls />
+
+## 사용 예시
+
+```tsx
+import { SelectHotelProductItem } from './components/select-hotel-product-item';
+
+function App() {
+  return (
+    <SelectHotelProductItem
+      sabreId={383336}
+      checkIn="2025-08-12"
+      nights={1}
+      numOfPeople="2"
+    />
+  );
+}
+```
+
+## Props 상세 설명
+
+### sabreId
+- **타입**: `number`
+- **필수**: ✅
+- **설명**: Sabre 시스템의 호텔 고유 식별자입니다.
+
+### checkIn
+- **타입**: `Date | string`
+- **필수**: ✅
+- **설명**: 체크인 날짜입니다. YYYY-MM-DD 형식의 문자열 또는 Date 객체를 받습니다.
+
+### nights
+- **타입**: `number`
+- **필수**: ❌
+- **기본값**: `1`
+- **설명**: 숙박 일수입니다.
+
+### numOfPeople
+- **타입**: `string`
+- **필수**: ❌
+- **기본값**: `"2"`
+- **설명**: 투숙 인원 수를 나타내는 문자열입니다.
+
+## 모든 스토리
+
+<Stories />

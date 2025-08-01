@@ -1,0 +1,66 @@
+import { Meta, Canvas, Controls, Primary, Stories } from '@storybook/addon-docs/blocks';
+import * as SelectHotelProductItemWCStories from './SelectHotelProductItem.webcomponent.stories';
+
+<Meta of={SelectHotelProductItemWCStories} />
+
+# SelectHotelProductItem 웹 컴포넌트
+
+호텔 상품을 선택하고 표시하는 웹 컴포넌트입니다. React 컴포넌트를 웹 컴포넌트로 변환하여 프레임워크에 구애받지 않고 사용할 수 있습니다.
+
+<Primary />
+
+## Props
+
+<Controls />
+
+## 사용 방법
+
+### HTML에서 사용
+
+```html
+<select-hotel-product 
+  sabre-id="383336"
+  check-in="2025-08-12"
+  nights="1"
+  num-of-people="2">
+</select-hotel-product>
+```
+
+### JavaScript에서 사용
+
+```javascript
+const hotelElement = document.createElement('select-hotel-product');
+hotelElement.setAttribute('sabre-id', '383336');
+hotelElement.setAttribute('check-in', '2025-08-12');
+hotelElement.setAttribute('nights', '1');
+hotelElement.setAttribute('num-of-people', '2');
+document.body.appendChild(hotelElement);
+```
+
+## 속성 (Attributes) 상세 설명
+
+### sabre-id
+- **타입**: `number | string`
+- **필수**: ✅
+- **설명**: Sabre 시스템의 호텔 고유 식별자입니다.
+
+### check-in
+- **타입**: `string`
+- **필수**: ✅
+- **설명**: 체크인 날짜입니다. YYYY-MM-DD 형식을 사용합니다.
+
+### nights
+- **타입**: `number | string`
+- **필수**: ❌
+- **기본값**: `1`
+- **설명**: 숙박 일수입니다.
+
+### num-of-people
+- **타입**: `string`
+- **필수**: ❌
+- **기본값**: `"2"`
+- **설명**: 투숙 인원 수를 나타내는 문자열입니다.
+
+## 모든 스토리
+
+<Stories />
