@@ -14,7 +14,6 @@ async function buildAll() {
     // 1. Clean dist directories
     console.log('📦 Cleaning dist directories...');
     await fs.remove(path.join(rootDir, 'dist'));
-    await fs.remove(path.join(rootDir, 'storybook-static'));
     await fs.ensureDir(path.join(rootDir, 'dist'));
     
     // 2. Build standalone Web Component bundles
@@ -181,7 +180,7 @@ function App() {
     console.log('   - React Component Module: ./dist/react/');
     console.log('   - Integrated Bundle: ./dist/');
     console.log('   - TypeScript definitions: ./dist/**/*.d.ts');
-    console.log('   - Storybook static site: ./storybook-static/');
+    console.log('   - Storybook static site: ./dist/storybook-static/');
     console.log('\n📦 Bundle types:');
     console.log('   - webcomponent/: Standalone with all dependencies bundled');
     console.log('   - react/: React component requiring React as peer dependency');

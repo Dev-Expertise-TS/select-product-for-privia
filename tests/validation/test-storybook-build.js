@@ -6,7 +6,7 @@ import { execSync } from 'child_process';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, '../..');
-const storybookDir = path.join(rootDir, 'storybook-static');
+const storybookDir = path.join(rootDir, 'dist/storybook-static');
 
 console.log('🧪 Testing Storybook Static Build...\n');
 

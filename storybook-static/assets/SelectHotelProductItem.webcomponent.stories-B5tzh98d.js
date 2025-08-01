@@ -1,0 +1,25 @@
+import{_ as x}from"./preload-helper-C1FmrZbK.js";import{e as _,r as L}from"./iframe-Df8nsTPe.js";import{c as M}from"./client-BZ3FiCMo.js";import{S as H}from"./select-hotel-product-item-C4wKuu-M.js";var D=Object.defineProperty,R=(t,e,o)=>e in t?D(t,e,{enumerable:!0,configurable:!0,writable:!0,value:o}):t[e]=o,h=(t,e,o)=>R(t,typeof e!="symbol"?e+"":e,o);const V={stringify:t=>t?"true":"false",parse:t=>/^[ty1-9]/i.test(t)},W={stringify:t=>t.name,parse:(t,e,o)=>{const s=(()=>{if(typeof window<"u"&&t in window)return window[t];if(typeof global<"u"&&t in global)return global[t]})();return typeof s=="function"?s.bind(o):void 0}},Y={stringify:t=>JSON.stringify(t),parse:t=>JSON.parse(t)},z={stringify:t=>`${t}`,parse:t=>parseFloat(t)},N={stringify:t=>t,parse:t=>t},O={string:N,number:z,boolean:V,function:W,json:Y};function $(t){return t.replace(/([a-z0-9])([A-Z])/g,(e,o,s)=>`${o}-${s.toLowerCase()}`)}const b=Symbol.for("r2wc.render"),y=Symbol.for("r2wc.connected"),p=Symbol.for("r2wc.context"),l=Symbol.for("r2wc.props");function J(t,e,o){var s,f,w;e.props||(e.props=t.propTypes?Object.keys(t.propTypes):[]),e.events||(e.events=[]);const g=Array.isArray(e.props)?e.props.slice():Object.keys(e.props),I=Array.isArray(e.events)?e.events.slice():Object.keys(e.events),m={},k={},S={},v={};for(const n of g){m[n]=Array.isArray(e.props)?"string":e.props[n];const r=$(n);S[n]=r,v[r]=n}for(const n of I)k[n]=Array.isArray(e.events)?{}:e.events[n];class A extends HTMLElement{constructor(){super(),h(this,w,!0),h(this,f),h(this,s,{}),h(this,"container"),e.shadow?this.container=this.attachShadow({mode:e.shadow}):this.container=this,this[l].container=this.container;for(const r of g){const u=S[r],c=this.getAttribute(u),i=m[r],a=i?O[i]:null;a!=null&&a.parse&&c&&(this[l][r]=a.parse(c,u,this))}for(const r of I)this[l][r]=u=>{const c=r.replace(/^on/,"").toLowerCase();this.dispatchEvent(new CustomEvent(c,{detail:u,...k[r]}))}}static get observedAttributes(){return Object.keys(v)}connectedCallback(){this[y]=!0,this[b]()}disconnectedCallback(){this[y]=!1,this[p]&&o.unmount(this[p]),delete this[p]}attributeChangedCallback(r,u,c){const i=v[r],a=m[i],P=a?O[a]:null;i in m&&P!=null&&P.parse&&c&&(this[l][i]=P.parse(c,r,this),this[b]())}[(w=y,f=p,s=l,b)](){this[y]&&(this[p]?o.update(this[p],this[l]):this[p]=o.mount(this.container,t,this[l]))}}for(const n of g){const r=S[n],u=m[n];Object.defineProperty(A.prototype,n,{enumerable:!0,configurable:!0,get(){return this[l][n]},set(c){this[l][n]=c;const i=u?O[u]:null;if(i!=null&&i.stringify){const a=i.stringify(c,r,this);this.getAttribute(r)!==a&&this.setAttribute(r,a)}else this[b]()}})}return A}function F(t,e,o){const s=M.createRoot(t),f=_.createElement(e,o);return s.render(f),{root:s,ReactComponent:e}}function Z({root:t,ReactComponent:e},o){const s=_.createElement(e,o);t.render(s)}function q({root:t}){t.unmount()}function B(t,e={}){return J(t,e,{mount:F,update:Z,unmount:q})}const T=B(H,{props:{sabreId:"number",checkIn:"string",nights:"number",numOfPeople:"string"}});customElements.define("select-hotel-product",T);const G=Object.freeze(Object.defineProperty({__proto__:null,SelectHotelProductItem:H,default:T},Symbol.toStringTag,{value:"Module"})),K=t=>(L.useEffect(()=>{customElements.get("select-hotel-product")||x(()=>Promise.resolve().then(()=>G),void 0,import.meta.url)},[]),_.createElement("select-hotel-product",{"sabre-id":t.sabreId,"check-in":t.checkIn,nights:t.nights,"num-of-people":t.numOfPeople})),Q={title:"Web Components/SelectHotelProductItem",component:K,parameters:{layout:"fullscreen",docs:{description:{component:`호텔 상품을 선택하고 표시하는 웹 컴포넌트입니다. React 컴포넌트를 웹 컴포넌트로 변환하여 프레임워크에 구애받지 않고 사용할 수 있습니다.
+
+## 사용 방법
+\`\`\`html
+<select-hotel-product 
+  sabre-id="383336"
+  check-in="2025-08-12"
+  nights="1"
+  num-of-people="2">
+</select-hotel-product>
+\`\`\``}}},argTypes:{sabreId:{control:"number",description:"Sabre 시스템의 호텔 고유 식별자",table:{type:{summary:"number | string"},category:"필수"}},checkIn:{control:"text",description:"체크인 날짜 (YYYY-MM-DD 형식)",table:{type:{summary:"string"},category:"필수"}},nights:{control:"number",description:"숙박 일수",table:{type:{summary:"number | string"},defaultValue:{summary:"1"},category:"선택"}},numOfPeople:{control:"text",description:"투숙 인원 수투숙 인원 수를 나타내는 formatted string",table:{type:{summary:"string"},defaultValue:{summary:'"2"'},category:"선택"}}}},d={args:{sabreId:383336,checkIn:"2025-08-12",nights:1,numOfPeople:"2"},parameters:{docs:{description:{story:"웹 컴포넌트 사용 예제입니다. HTML에서 <select-hotel-product> 태그로 사용할 수 있습니다."}}}};var E,C,j;d.parameters={...d.parameters,docs:{...(E=d.parameters)==null?void 0:E.docs,source:{originalSource:`{
+  args: {
+    sabreId: 383336,
+    checkIn: '2025-08-12',
+    nights: 1,
+    numOfPeople: '2'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: '웹 컴포넌트 사용 예제입니다. HTML에서 <select-hotel-product> 태그로 사용할 수 있습니다.'
+      }
+    }
+  }
+}`,...(j=(C=d.parameters)==null?void 0:C.docs)==null?void 0:j.source}}};const U=["Default"],ot=Object.freeze(Object.defineProperty({__proto__:null,Default:d,__namedExportsOrder:U,default:Q},Symbol.toStringTag,{value:"Module"}));export{ot as S};
