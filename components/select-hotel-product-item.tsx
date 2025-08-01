@@ -1,6 +1,4 @@
 'use client';
-
-import Image from 'next/image';
 import {
   // Camera,
   Utensils,
@@ -53,7 +51,7 @@ const genSabreApiEp = ({
   sabreId,
   checkIn,
   nights=1,
-  numOfPeople='2',
+  numOfPeople='2'
 }: {
   sabreId: number;
   checkIn: string | Date;
@@ -62,7 +60,7 @@ const genSabreApiEp = ({
 }) => {
   try {
     const _checkIn = formatParamDate(checkIn);
-    return `${process.env.NEXT_PUBLIC_SABRE_API_BASE}/${sabreId}/select-rooms-price/?check_in=${_checkIn}&nights=${nights}&number_of_people=${numOfPeople}`;
+    return `https://sabre-nodejs-9tia3.ondigitalocean.app/public/hotel/sabre/${sabreId}/select-rooms-price/?check_in=${_checkIn}&nights=${nights}&number_of_people=${numOfPeople}`;
   } catch (err) {
     throw new Error('cannot generate Sabre API Endpoint. Invalid checkIn value is given.');
   }
@@ -108,45 +106,15 @@ type SelectHotelProductItemProps = {
   checkIn: Date | string;
   nights?: number;
   numOfPeople?: string;
-
-  // 사실상 정적 값인 프로퍼티들.
-  prdTitle?: string;
-  benefits?: Benefit[];
-  cautions?: string[];
 };
 
-
-// 실제 페이지에서 사용하는 데이터와 동일하게 설정
-const realPageBenefits: Benefit[] = [
-  {
-    icon: <Utensils className="w-4 h-4 text-gray-500 px-0 py-0" />,
-    benefit: '2인 조식 포함',
-  },
-  { 
-    icon: <CreditCard className="w-4 h-4 text-gray-500" />, 
-    benefit: '$100 크레딧 제공' 
-  },
-  {
-    icon: <ArrowUpCircle className="w-4 h-4 text-gray-500" />,
-    benefit: '객실 무료 업그레이드 (현장 가능시)',
-  },
-  {
-    icon: <Clock className="w-4 h-4 text-gray-500" />,
-    benefit: '얼리체크인 & 레이트 체크아웃 (현장 가능시)',
-  },
-];
 
 export function SelectHotelProductItem({
   // 외부로부터 주입 받는 값
   checkIn,
   numOfPeople = '2',
   sabreId,
-  nights = 1,
-  
-  // 사실상 정적인 프로퍼티들
-  prdTitle='럭셔리 셀렉트 - 후불 현장 결제',
-  benefits= realPageBenefits,
-  cautions = ['현장 결제시 환율에 따라 최종 원화 결제 금액이 변동될 수 있습니다.'],
+  nights = 1
 }: SelectHotelProductItemProps) {
   const [resData, setResData] = useState<SabreResponseBody | undefined | null>();
   const [isLoading, setIsLoading] = useState(false);
@@ -156,11 +124,35 @@ export function SelectHotelProductItem({
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const res = await fetch(genSabreApiEp({ sabreId, checkIn, nights, numOfPeople }));
-        const data = await res.json();
+        const url = genSabreApiEp({ sabreId, checkIn, nights, numOfPeople });
+        console.log('Fetching URL:', url);
+        
+        const res = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          mode: 'cors', // CORS 명시적 설정
+        });
+        
+        console.log('Response status:', res.status);
+        console.log('Response headers:', res.headers.get('content-type'));
+        
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        
+        const text = await res.text();
+        console.log('Response text preview:', text.substring(0, 100));
+        
+        const data = JSON.parse(text);
         setResData(data);
       } catch (err) {
-        console.error(err);
+        console.error('Fetch error:', err);
+        if (err instanceof TypeError && err.message.includes('Failed to fetch')) {
+          console.error('CORS error or network issue. Check browser console for details.');
+        }
         setResData(null);
       } finally {
         setIsLoading(false);
@@ -199,7 +191,7 @@ export function SelectHotelProductItem({
   return (
     <div className="border-2 border-[#e5398f] overflow-hidden bg-white shadow-md md:shadow-none rounded-xl">
       <header className="bg-[#e5398f] text-white p-3 text-center sm:text-left font-medium">
-        {prdTitle}
+        {'럭셔리 셀렉트 - 후불 현장 결제'}
       </header>
       <div className="grid grid-cols-1 lg:grid-cols-5 lg:gap-0 items-start justify-stretch">
         {/* Left Column: Image + Details (60%) */}
@@ -224,7 +216,7 @@ export function SelectHotelProductItem({
                     <div className="w-60 h-5 animate-pulse bg-gray-200 rounded-sm" />
                   ) : typeof firstRoom !== 'string' && (
                     <>
-                      <Image
+                      <img
                         src="https://static.priviatravel.com/images/front/mtravel/svg/ico-check-blue-circle.svg"
                         alt="Free cancellation icon"
                         width={20}
@@ -237,13 +229,30 @@ export function SelectHotelProductItem({
               </div>
               <div className="pt-3 mt-1">
                 <ul className="space-y-2">
-                  {benefits.map((item, index) => (
+                  {[
+  {
+    icon: <Utensils className="w-4 h-4 text-gray-500 px-0 py-0" />,
+    benefit: '2인 조식 포함',
+  },
+  { 
+    icon: <CreditCard className="w-4 h-4 text-gray-500" />, 
+    benefit: '$100 크레딧 제공' 
+  },
+  {
+    icon: <ArrowUpCircle className="w-4 h-4 text-gray-500" />,
+    benefit: '객실 무료 업그레이드 (현장 가능시)',
+  },
+  {
+    icon: <Clock className="w-4 h-4 text-gray-500" />,
+    benefit: '얼리체크인 & 레이트 체크아웃 (현장 가능시)',
+  },
+].map((item, index) => (
                     <li
                       key={index}
                       className="flex items-center gap-2 text-sm text-gray-600"
                     >
                       {typeof item.icon === 'string' ? (
-                        <Image
+                        <img
                           src={item.icon || '/placeholder.svg'}
                           alt=""
                           width={16}
@@ -288,13 +297,9 @@ export function SelectHotelProductItem({
                       return (a?.price || 0) - (b.price || 0);
                     })[0].roomDescription.replace(/<html.+html>/, '') }` || '' }} /> */}
             {/* api 로부터 가져오는 룸 디스크립션을 사용해야 할 경우 아래 치환 섹션을 주석 처리 할것 */}
-            {cautions.length > 0 && (
-              <div className="text-xs text-red-500 text-left sm:text-right">
-                {cautions.map((caution, index) => (
-                  <div key={index}>※ {caution}</div>
-                ))}
-              </div>
-            )}
+            <div className="text-xs text-red-500 text-left sm:text-right">
+            <div >※ 현장 결제시 환율에 따라 최종 원화 결제 금액이 변동될 수 있습니다.</div>
+            </div>
             <a
               href="https://pf.kakao.com/_cxmxgNG/chat"
               className="inline-block bg-black text-white py-3 px-8 rounded-md hover:bg-gray-800 transition-colors w-full sm:w-auto text-center font-medium"

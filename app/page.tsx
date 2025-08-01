@@ -4,13 +4,6 @@ import { CreditCard, Clock, ArrowUpCircle, Utensils } from 'lucide-react';
 export default function Home() {
   const hotelProduct = {
     prdTitle: '럭셔리 셀렉트 - 후불 현장 결제',
-    roomImages: [
-      '/placeholder.svg?width=400&height=400',
-      '/placeholder.svg?width=400&height=400',
-      '/placeholder.svg?width=400&height=400',
-    ],
-    roomName: '최저가 객실명',
-    cancelStr: '2025.07.23 까지 무료취소 >',
     benefits: [
       {
         icon: <Utensils className="w-4 h-4 text-gray-500 px-0 py-0" />,
@@ -28,11 +21,10 @@ export default function Home() {
     ],
     pricingType: '일반요금',
     nights: 1,
-    // pricePerNights: 603593,
     cautions: ['현장 결제시 환율에 따라 최종 원화 결제 금액이 변동될 수 있습니다.'],
     sabreId: 383336,
-    checkIn: '2025-08-01',
-    numOfPeople: 2,
+    checkIn: '2025-08-12',
+    numOfPeople: '2',
   };
 
   return (

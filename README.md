@@ -1,180 +1,187 @@
-# SelectHotelProductItem 컴포넌트
+# Select Hotel Product Widget
 
-호텔 상품 정보를 표시하고 실시간 가격을 조회하는 React 컴포넌트입니다.
+호텔 상품 선택 위젯을 위한 React 기반 웹 컴포넌트입니다. React로 개발하되, 최종 배포는 표준 웹 컴포넌트(Custom Element)로 패키징되어 어떤 웹 환경에서도 사용 가능합니다.
 
-## 설치 및 설정
+## 🎯 주요 특징
 
-### 1. 상위 프로젝트 요구사항
+- **웹 컴포넌트**: 프레임워크 독립적으로 어떤 웹 환경에서도 사용 가능
+- **React 개발**: 개발은 React로 진행하되, 빌드 시 웹 컴포넌트로 변환
+- **실시간 가격 조회**: Sabre API를 통한 실시간 호텔 가격 정보
+- **반응형 디자인**: 모바일과 데스크톱 환경에서 최적화된 UI
+- **카카오톡 연동**: 고객 상담을 위한 카카오톡 통합
 
-#### Tailwind CSS 필수
-이 컴포넌트는 Tailwind CSS에 완전히 의존합니다. 상위 프로젝트에서 Tailwind CSS가 설정되어 있어야 합니다.
+## 📦 웹 컴포넌트 사용방법
 
-**Tailwind CSS가 없는 경우:**
-```bash
-npm install tailwindcss postcss autoprefixer
-npx tailwindcss init -p
-```
+### 1. 빌드된 파일 포함하기
 
-**빠른 테스트용 (CDN):**
 ```html
-<script src="https://cdn.tailwindcss.com"></script>
+<!-- UMD 버전 (레거시 환경) -->
+<script src="path/to/select-hotel-product-widget.umd.js"></script>
+
+<!-- 또는 ES Module 버전 (모던 브라우저) -->
+<script type="module" src="path/to/select-hotel-product-widget.es.js"></script>
 ```
 
-#### 필수 의존성
+### 2. HTML에서 사용하기
+
+```html
+<select-hotel-product 
+    sabre-id="383336"
+    check-in="2025-08-15"
+    nights="2"
+    num-of-people="2"
+    api-base-url="https://api.example.com">
+</select-hotel-product>
+```
+
+### 3. JavaScript에서 동적 생성
+
+```javascript
+const widget = document.createElement('select-hotel-product');
+widget.setAttribute('sabre-id', '383336');
+widget.setAttribute('check-in', '2025-08-15');
+widget.setAttribute('nights', '2');
+widget.setAttribute('num-of-people', '2');
+widget.setAttribute('api-base-url', 'https://api.example.com');
+document.body.appendChild(widget);
+```
+
+## 🏗️ 개발 환경 설정
+
+### 사전 요구사항
+
+- Node.js 18.x 이상
+- pnpm 10.x 이상
+
+### 설치
+
 ```bash
-npm install next react react-dom lucide-react
+# 의존성 설치
+pnpm install
 ```
 
-### 2. 필수 환경 변수 설정
+### 개발 서버 실행
+
 ```bash
-# .env
-NEXT_PUBLIC_SABRE_API_BASE=https://your-sabre-api-endpoint.com
-```
-위 환경변수가 올바른 값으로 정확히 설정되어 있어야만 합니다.
+# 웹 컴포넌트 개발 서버 (http://localhost:5173)
+pnpm dev:widget
 
-## 사용 방법
-
-```tsx
-import { SelectHotelProductItem } from 'path/to/select-hotel-product-item';
-
-export default function HotelPage() {
-  return (
-    <SelectHotelProductItem
-      sabreId={383336}
-      checkIn="2025-08-01"
-      nights={2}
-      numOfPeople="2"
-    />
-  );
-}
+# Next.js 개발 서버 (http://localhost:3000)
+pnpm dev
 ```
 
-## Props 명세
+## 🔨 빌드 방법
 
-### 필수 Props (외부 주입)
-이 Props들은 동적으로 변경되는 값들로, 상위 컴포넌트에서 반드시 제공해야 합니다.
+### 웹 컴포넌트 빌드
 
-| Prop | 타입 | 필수 | 설명 |
-|------|------|------|------|
-| `sabreId` | `number` | ✅ | Sabre API에서 사용하는 호텔 식별자 |
-| `checkIn` | `Date \| string` | ✅ | 체크인 날짜 (YYYY-MM-DD 형식 권장) |
-| `nights` | `number` | ❌ | 숙박 일수 (기본값: 1) |
-| `numOfPeople` | `string` | ❌ | 인원 수 (기본값: "2") |
-
-**사용 예시:**
-```tsx
-<SelectHotelProductItem
-  sabreId={383336}
-  checkIn="2025-08-01"
-  nights={3}
-  numOfPeople="4"
-/>
+```bash
+pnpm build:widget
 ```
 
-### 선택적 Props (정적 값)
-이 Props들은 대부분의 경우 기본값을 사용하며, 특별한 경우에만 커스터마이징합니다.
+이 명령어는 다음 파일들을 생성합니다:
+- `dist/select-hotel-product-widget.es.js` - ES Module 형식
+- `dist/select-hotel-product-widget.umd.js` - UMD 형식 (레거시 지원)
+- `dist/style.css` - 스타일시트 (자동으로 컴포넌트에 포함됨)
 
-| Prop | 타입 | 기본값 | 설명 |
+### Next.js 앱 빌드
+
+```bash
+pnpm build
+```
+
+## 📋 API 속성
+
+### 필수 속성
+
+| 속성 | 타입 | 설명 |
+|------|------|------|
+| `sabre-id` | number | Sabre 시스템의 호텔 ID |
+| `check-in` | string | 체크인 날짜 (YYYY-MM-DD 형식) |
+| `api-base-url` | string | Sabre API 서버 주소 |
+
+### 선택 속성
+
+| 속성 | 타입 | 기본값 | 설명 |
 |------|------|--------|------|
-| `prdTitle` | `string` | "럭셔리 셀렉트 - 후불 현장 결제" | 상품 제목 |
-| `benefits` | `Benefit[]` | 기본 혜택 목록 | 호텔 혜택 리스트 |
-| `cautions` | `string[]` | 기본 주의사항 | 결제 관련 주의사항 |
+| `nights` | number | 1 | 숙박 일수 |
+| `num-of-people` | string | "2" | 투숙 인원 |
+| `prd-title` | string | - | 상품 제목 |
+| `benefits` | JSON string | - | 혜택 목록 (JSON 배열) |
+| `cautions` | JSON string | - | 주의사항 목록 (JSON 배열) |
 
-#### Benefit 타입 정의
-```tsx
-type Benefit = {
-  icon: string | ReactNode;  // 아이콘 (문자열 URL 또는 React 컴포넌트)
-  benefit: string;           // 혜택 설명
-}
+### 고급 사용 예제
+
+```html
+<select-hotel-product 
+    sabre-id="383336"
+    check-in="2025-08-15"
+    nights="3"
+    num-of-people="4"
+    api-base-url="https://api.example.com"
+    prd-title="프리미엄 스위트룸"
+    benefits='["조식 포함", "늦은 체크아웃", "공항 셔틀"]'
+    cautions='["취소 불가", "성인 전용"]'>
+</select-hotel-product>
 ```
 
-**커스텀 혜택 예시:**
-```tsx
-import { Wifi, Car } from 'lucide-react';
+## 🏛️ 프로젝트 구조
 
-const customBenefits = [
-  {
-    icon: <Wifi className="w-4 h-4 text-gray-500" />,
-    benefit: '무료 Wi-Fi'
-  },
-  {
-    icon: <Car className="w-4 h-4 text-gray-500" />,
-    benefit: '무료 주차'
-  }
-];
-
-<SelectHotelProductItem
-  sabreId={383336}
-  checkIn="2025-08-01"
-  benefits={customBenefits}
-/>
+```
+select-product-for-privia/
+├── src/
+│   ├── widget.tsx          # 웹 컴포넌트 엔트리 포인트
+│   └── mock-server.js      # 개발용 Mock API 서버
+├── components/
+│   ├── select-hotel-product-item.tsx  # 메인 React 컴포넌트
+│   └── ui/                 # shadcn/ui 컴포넌트
+├── app/                    # Next.js 앱 (개발/테스트용)
+├── dist/                   # 빌드된 웹 컴포넌트 (빌드 후 생성)
+├── vite.config.ts          # Vite 빌드 설정
+└── index.html              # 웹 컴포넌트 개발 환경
 ```
 
-## API 연동
+## 🔧 기술 스택
 
-### Sabre API 엔드포인트 형식
-```
-${NEXT_PUBLIC_SABRE_API_BASE}/${sabreId}/select-rooms-price/?check_in=${checkIn}&nights=${nights}&number_of_people=${numOfPeople}
-```
+- **코어**: React 19, TypeScript
+- **빌드**: Vite (웹 컴포넌트), Next.js 15 (개발 환경)
+- **스타일링**: Tailwind CSS, shadcn/ui
+- **웹 컴포넌트 변환**: @r2wc/react-to-web-component
+- **아이콘**: Lucide React
 
-### API 응답 형식
-```tsx
-type SabreResponseBody = {
-  propertyNameKor: string;    // 호텔명 (한국어)
-  propertyNameEng: string;    // 호텔명 (영어)
-  destinationKor: string;     // 목적지 (한국어)
-  destinationEng: string;     // 목적지 (영어)
-  cityKor: string;           // 도시 (한국어)
-  cityEng: string;           // 도시 (영어)
-  paragonId: number;         // Paragon ID
-  roomDescriptions: {        // 객실 정보 배열
-    price: number;           // 가격
-    roomCode: string;        // 객실 코드
-    roomName: string;        // 객실명
-    roomDescription: string; // 객실 설명
-    cancelDeadLine: string;  // 취소 마감일 (YYYYMMDD)
-  }[];
-}
-```
+## 🌐 브라우저 지원
 
-## 기능
+웹 컴포넌트는 다음 브라우저에서 지원됩니다:
+- Chrome/Edge 54+
+- Firefox 63+
+- Safari 10.1+
+- iOS Safari 10.3+
 
-### 실시간 가격 조회
-- 컴포넌트 마운트시 Sabre API에서 실시간 가격 조회
-- 로딩 상태 표시 (스켈레톤 UI)
-- API 오류시 "카카오톡 상담 필요" 메시지 표시
+## 🚀 배포
 
-### 반응형 디자인
-- 모바일, 태블릿, 데스크톱 최적화
-- `sm:`, `lg:` 등 Tailwind CSS 반응형 클래스 사용
+빌드된 웹 컴포넌트는 다음과 같이 배포할 수 있습니다:
 
-### 카카오톡 상담 연동
-- 고정된 카카오톡 채널로 연결: `https://pf.kakao.com/_cxmxgNG/chat`
-- 가격 조회 실패시 상담 버튼으로 대체
+1. **CDN 배포**
+   ```html
+   <script src="https://cdn.example.com/select-hotel-product-widget.es.js" type="module"></script>
+   ```
 
-## 스타일링
+2. **NPM 패키지**
+   ```bash
+   npm install @your-org/select-hotel-product-widget
+   ```
 
-### 주요 색상
-- 브랜드 컬러: `#e5398f` (헤더 배경, 테두리)
-- 텍스트: 파란색 (`text-blue-600`), 회색 (`text-gray-500`)
+3. **직접 호스팅**
+   - `dist/` 폴더의 파일들을 웹 서버에 업로드
+   - 적절한 CORS 헤더 설정 필요
 
-### 커스터마이징
-Tailwind CSS 클래스를 직접 수정하거나 CSS-in-JS로 변환하여 스타일 커스터마이징 가능합니다.
+## 🔍 디버깅
 
-## 주의사항
+개발 중 문제가 발생하면:
 
-1. **Tailwind CSS 필수**: 상위 프로젝트에서 Tailwind CSS가 설정되어 있어야 합니다.
-2. **환경 변수**: `NEXT_PUBLIC_SABRE_API_BASE` 환경 변수가 .env 파일에 설정되어 있어야 합니다. api 호출상의 보안을 위한 장치가 별도로 없기 때문에 환경 변수로 제공합니다.
-3. **날짜 형식**: `checkIn`은 YYYY-MM-DD 형식 문자열이나 유효한 Date 객체여야 합니다.
-4. **CORS**: Sabre API 서버에서 브라우저 요청을 허용해야 합니다.
+1. 브라우저 개발자 도구의 콘솔 확인
+2. 네트워크 탭에서 API 호출 확인
+3. Elements 탭에서 Shadow DOM 구조 확인
 
-## 문제 해결
+## 📝 라이센스
 
-### 스타일이 적용되지 않는 경우
-- Tailwind CSS가 올바르게 설정되었는지 확인
-- CDN 방식으로 테스트해보기
-
-### API 요청이 실패하는 경우
-- 환경 변수 `NEXT_PUBLIC_SABRE_API_BASE` 확인
-- 네트워크 탭에서 API 응답 확인
-- CORS 설정 확인
+이 프로젝트는 비공개 프로젝트입니다.
