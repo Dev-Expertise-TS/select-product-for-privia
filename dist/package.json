@@ -11,9 +11,9 @@
       "types": "./index.d.ts"
     },
     "./react": {
-      "import": "./react/select-hotel-product-widget.es.js",
-      "require": "./react/select-hotel-product-widget.umd.js",
-      "types": "./react/index.d.ts"
+      "import": "./react/select-hotel-product-item.es.js",
+      "require": "./react/select-hotel-product-item.cjs.js",
+      "types": "./react/select-hotel-product-item.d.ts"
     },
     "./webcomponent": {
       "import": "./webcomponent/select-hotel-product-widget-standalone.es.js",

@@ -45,6 +45,7 @@ export default defineConfig({
   plugins: [react(), generateDts()],
   
   build: {
+    emptyOutDir: false,  // 기존 dist 디렉토리 내용 유지
     lib: {
       entry: resolve(__dirname, 'src/components/select-hotel-product-item.web-component.ts'),
       name: 'SelectHotelProductWidget',

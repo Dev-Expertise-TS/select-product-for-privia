@@ -18,3 +18,12 @@ function App() {
   );
 }
 ```
+
+## Files in this directory:
+- .gitkeep
+- package.json
+- select-hotel-product-item.cjs.js
+- select-hotel-product-item.cjs.js.map
+- select-hotel-product-item.d.ts
+- select-hotel-product-item.es.js
+- select-hotel-product-item.es.js.map

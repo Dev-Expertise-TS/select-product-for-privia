@@ -1,9 +1,9 @@
 {
   "name": "select-hotel-product-widget-react",
   "version": "0.1.0",
-  "main": "select-hotel-product-widget.umd.js",
-  "module": "select-hotel-product-widget.es.js",
-  "types": "index.d.ts",
+  "main": "select-hotel-product-item.cjs.js",
+  "module": "select-hotel-product-item.es.js",
+  "types": "select-hotel-product-item.d.ts",
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"

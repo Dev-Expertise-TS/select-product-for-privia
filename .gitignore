@@ -37,3 +37,6 @@ validation-report.json
 
 # bundles
 # dist/
+
+# debug logs
+*.log

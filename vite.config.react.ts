@@ -21,8 +21,14 @@ export interface SelectHotelProductItemProps {
 export declare const SelectHotelProductItem: FC<SelectHotelProductItemProps>;
 `;
       
+      const targetDir = path.resolve(__dirname, 'dist/react');
+      // Ensure directory exists
+      if (!fs.existsSync(targetDir)) {
+        fs.mkdirSync(targetDir, { recursive: true });
+      }
+      
       fs.writeFileSync(
-        path.resolve(__dirname, 'dist/react/select-hotel-product-item.d.ts'),
+        path.join(targetDir, 'select-hotel-product-item.d.ts'),
         dtsContent
       );
     }
