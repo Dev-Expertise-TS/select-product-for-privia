@@ -1,0 +1,27 @@
+{
+  "name": "select-hotel-product-widget",
+  "version": "0.1.0",
+  "main": "select-hotel-product-widget.umd.js",
+  "module": "select-hotel-product-widget.es.js",
+  "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./select-hotel-product-widget.es.js",
+      "require": "./select-hotel-product-widget.umd.js",
+      "types": "./index.d.ts"
+    },
+    "./react": {
+      "import": "./react/select-hotel-product-widget.es.js",
+      "require": "./react/select-hotel-product-widget.umd.js",
+      "types": "./react/index.d.ts"
+    },
+    "./webcomponent": {
+      "import": "./webcomponent/select-hotel-product-widget-standalone.es.js",
+      "require": "./webcomponent/select-hotel-product-widget-standalone.umd.js"
+    }
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  }
+}

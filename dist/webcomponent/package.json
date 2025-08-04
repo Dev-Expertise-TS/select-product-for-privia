@@ -1,0 +1,7 @@
+{
+  "name": "select-hotel-product-widget-standalone",
+  "version": "0.1.0",
+  "main": "select-hotel-product-widget-standalone.umd.js",
+  "module": "select-hotel-product-widget-standalone.es.js",
+  "description": "Standalone web component with all dependencies bundled"
+}
