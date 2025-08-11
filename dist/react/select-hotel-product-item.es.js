@@ -252,19 +252,14 @@ function SelectHotelProductItem({
               {
                 className: "flex items-center gap-1.5 text-blue-600",
                 children: isLoading || !fifthRoom ? /* @__PURE__ */ jsx("div", { className: "w-60 h-5 animate-pulse bg-gray-200 rounded-sm" }) : typeof fifthRoom !== "string" && /* @__PURE__ */ jsxs(Fragment, { children: [
-                  /* @__PURE__ */ jsx(
-                    "img",
-                    {
-                      src: "https://static.priviatravel.com/images/front/mtravel/svg/ico-check-blue-circle.svg",
-                      alt: "Free cancellation icon",
-                      style: {
-                        width: "20px",
-                        height: "20px"
-                      },
-                      width: 20,
-                      height: 20
-                    }
-                  ),
+                  /* @__PURE__ */ jsx("div", { style: {
+                    width: "20px",
+                    height: "20px",
+                    backgroundImage: "url(https://static.priviatravel.com/images/front/mtravel/svg/ico-check-blue-circle.svg)",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center",
+                    backgroundSize: "contain"
+                  } }),
                   /* @__PURE__ */ jsxs("span", { className: "text-sm font-medium", children: [
                     fifthRoom.cancelDeadLine,
                     " 까지 무료 취소"

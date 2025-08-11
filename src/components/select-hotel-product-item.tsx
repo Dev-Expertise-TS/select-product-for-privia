@@ -209,16 +209,15 @@ export function SelectHotelProductItem({
                     <div className="w-60 h-5 animate-pulse bg-gray-200 rounded-sm" />
                   ) : typeof fifthRoom !== 'string' && (
                     <>
-                      <img
-                        src="https://static.priviatravel.com/images/front/mtravel/svg/ico-check-blue-circle.svg"
-                        alt="Free cancellation icon"
-                        style={{
+                      <div style={{
                           width: '20px',
-                          height: '20px'
-                        }}
-                        width={20}
-                        height={20}
-                      />
+                          height: '20px',
+                          backgroundImage: 'url(https://static.priviatravel.com/images/front/mtravel/svg/ico-check-blue-circle.svg)',
+                          backgroundRepeat: 'no-repeat',
+                          backgroundPosition: 'center',
+                          backgroundSize: 'contain',
+                        }}>
+                      </div>
                       <span className="text-sm font-medium">{fifthRoom.cancelDeadLine} 까지 무료 취소</span>
                     </>
                   ) 
