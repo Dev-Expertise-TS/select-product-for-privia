@@ -257,6 +257,10 @@ function SelectHotelProductItem({
                     {
                       src: "https://static.priviatravel.com/images/front/mtravel/svg/ico-check-blue-circle.svg",
                       alt: "Free cancellation icon",
+                      style: {
+                        width: "20px",
+                        height: "20px"
+                      },
                       width: 20,
                       height: 20
                     }
@@ -268,7 +272,7 @@ function SelectHotelProductItem({
                 ] })
               }
             ),
-            /* @__PURE__ */ jsx("div", { className: "pt-3 mt-1", children: /* @__PURE__ */ jsx("ul", { className: "space-y-2", children: [
+            /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx("ul", { className: "flex flex-col gap-1", children: [
               {
                 icon: /* @__PURE__ */ jsx(Utensils, { className: "w-4 h-4 text-gray-500 px-0 py-0" }),
                 benefit: "2인 조식 포함"
@@ -288,6 +292,9 @@ function SelectHotelProductItem({
             ].map((item, index) => /* @__PURE__ */ jsxs(
               "li",
               {
+                style: {
+                  marginTop: 0
+                },
                 className: "flex items-center gap-2 text-sm text-gray-600",
                 children: [
                   typeof item.icon === "string" ? /* @__PURE__ */ jsx(

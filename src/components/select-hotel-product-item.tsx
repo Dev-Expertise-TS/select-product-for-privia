@@ -212,6 +212,10 @@ export function SelectHotelProductItem({
                       <img
                         src="https://static.priviatravel.com/images/front/mtravel/svg/ico-check-blue-circle.svg"
                         alt="Free cancellation icon"
+                        style={{
+                          width: '20px',
+                          height: '20px'
+                        }}
                         width={20}
                         height={20}
                       />
@@ -220,8 +224,8 @@ export function SelectHotelProductItem({
                   ) 
                 }
               </div>
-              <div className="pt-3 mt-1">
-                <ul className="space-y-2">
+              <div>
+                <ul className="flex flex-col gap-1">
                   {[
   {
     icon: <Utensils className="w-4 h-4 text-gray-500 px-0 py-0" />,
@@ -241,6 +245,9 @@ export function SelectHotelProductItem({
   },
 ].map((item, index) => (
                     <li
+                      style={{
+                        marginTop: 0
+                      }}
                       key={index}
                       className="flex items-center gap-2 text-sm text-gray-600"
                     >

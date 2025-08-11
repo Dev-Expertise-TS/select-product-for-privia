@@ -10621,6 +10621,10 @@ function o1({
                     {
                       src: "https://static.priviatravel.com/images/front/mtravel/svg/ico-check-blue-circle.svg",
                       alt: "Free cancellation icon",
+                      style: {
+                        width: "20px",
+                        height: "20px"
+                      },
                       width: 20,
                       height: 20
                     }
@@ -10632,7 +10636,7 @@ function o1({
                 ] })
               }
             ),
-            /* @__PURE__ */ q.jsx("div", { className: "pt-3 mt-1", children: /* @__PURE__ */ q.jsx("ul", { className: "space-y-2", children: [
+            /* @__PURE__ */ q.jsx("div", { children: /* @__PURE__ */ q.jsx("ul", { className: "flex flex-col gap-1", children: [
               {
                 icon: /* @__PURE__ */ q.jsx(f1, { className: "w-4 h-4 text-gray-500 px-0 py-0" }),
                 benefit: "2인 조식 포함"
@@ -10652,6 +10656,9 @@ function o1({
             ].map((r, m) => /* @__PURE__ */ q.jsxs(
               "li",
               {
+                style: {
+                  marginTop: 0
+                },
                 className: "flex items-center gap-2 text-sm text-gray-600",
                 children: [
                   typeof r.icon == "string" ? /* @__PURE__ */ q.jsx(
