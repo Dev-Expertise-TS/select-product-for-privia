@@ -25608,7 +25608,7 @@ function A2({
                 "a",
                 {
                   href: "https://pf.kakao.com/_cxmxgNG/chat",
-                  className: "inline-block bg-black text-white py-3 px-8 rounded-md hover:bg-gray-800 transition-colors w-full sm:w-auto text-center font-medium",
+                  className: "inline-block bg-black text-white py-3 px-8 rounded-sm",
                   children: "카카오톡 상담"
                 }
               )
