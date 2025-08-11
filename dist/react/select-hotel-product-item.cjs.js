@@ -234,95 +234,105 @@ function SelectHotelProductItem({
       setFirstRoom("카카오톡 상담 필요");
     }
   }, [resData]);
-  return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "border-2 border-[#e5398f] overflow-hidden bg-white shadow-md md:shadow-none rounded-xl", children: [
-    /* @__PURE__ */ jsxRuntime.jsx("header", { className: "bg-[#e5398f] text-white p-3 text-center sm:text-left font-medium", children: "럭셔리 셀렉트 - 후불 현장 결제" }),
-    /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "grid grid-cols-1 lg:grid-cols-5 lg:gap-0 items-start justify-stretch", children: [
-      /* @__PURE__ */ jsxRuntime.jsx("div", { className: "lg:col-span-3 p-4 sm:p-6 lg:p-8 lg:pr-4 px-0 py-0", children: /* @__PURE__ */ jsxRuntime.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-3 md:gap-6 items-start", children: /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "sm:col-span-2 flex flex-col gap-3 p-4 md:p-0", children: [
-        /* @__PURE__ */ jsxRuntime.jsx("span", { className: "font-semibold text-blue-600", children: "[후불 현장 결제]" }),
-        isLoading || !firstRoom ? /* @__PURE__ */ jsxRuntime.jsx("div", { className: "w-48 h-6 animate-pulse bg-gray-200 rounded-sm" }) : typeof firstRoom !== "string" && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "font-bold", children: firstRoom.hotelName }),
-        /* @__PURE__ */ jsxRuntime.jsx(
-          "div",
-          {
-            className: "flex items-center gap-1.5 text-blue-600",
-            children: isLoading || !firstRoom ? /* @__PURE__ */ jsxRuntime.jsx("div", { className: "w-60 h-5 animate-pulse bg-gray-200 rounded-sm" }) : typeof firstRoom !== "string" && /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-              /* @__PURE__ */ jsxRuntime.jsx(
-                "img",
-                {
-                  src: "https://static.priviatravel.com/images/front/mtravel/svg/ico-check-blue-circle.svg",
-                  alt: "Free cancellation icon",
-                  width: 20,
-                  height: 20
-                }
-              ),
-              /* @__PURE__ */ jsxRuntime.jsxs("span", { className: "text-sm font-medium", children: [
-                firstRoom.cancelDeadLine,
-                " 까지 무료 취소"
+  return /* @__PURE__ */ jsxRuntime.jsxs(
+    "div",
+    {
+      className: "overflow-hidden bg-white shadow-md md:shadow-none rounded-xl",
+      style: {
+        border: "1px solid #e5398f",
+        marginTop: "30px"
+      },
+      children: [
+        /* @__PURE__ */ jsxRuntime.jsx("header", { className: "bg-[#e5398f] text-white p-3 text-center sm:text-left font-medium", children: "럭셔리 셀렉트 - 후불 현장 결제" }),
+        /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "grid grid-cols-1 lg:grid-cols-5 lg:gap-0 items-start justify-stretch", children: [
+          /* @__PURE__ */ jsxRuntime.jsx("div", { className: "lg:col-span-3 p-4 sm:p-6 lg:p-8 lg:pr-4 px-0 py-0", children: /* @__PURE__ */ jsxRuntime.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-3 md:gap-6 items-start", children: /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "sm:col-span-2 flex flex-col gap-3 p-4 md:p-0", children: [
+            /* @__PURE__ */ jsxRuntime.jsx("span", { className: "font-semibold text-blue-600", children: "[후불 현장 결제]" }),
+            isLoading || !firstRoom ? /* @__PURE__ */ jsxRuntime.jsx("div", { className: "w-48 h-6 animate-pulse bg-gray-200 rounded-sm" }) : typeof firstRoom !== "string" && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "font-bold", children: firstRoom.hotelName }),
+            /* @__PURE__ */ jsxRuntime.jsx(
+              "div",
+              {
+                className: "flex items-center gap-1.5 text-blue-600",
+                children: isLoading || !firstRoom ? /* @__PURE__ */ jsxRuntime.jsx("div", { className: "w-60 h-5 animate-pulse bg-gray-200 rounded-sm" }) : typeof firstRoom !== "string" && /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
+                  /* @__PURE__ */ jsxRuntime.jsx(
+                    "img",
+                    {
+                      src: "https://static.priviatravel.com/images/front/mtravel/svg/ico-check-blue-circle.svg",
+                      alt: "Free cancellation icon",
+                      width: 20,
+                      height: 20
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntime.jsxs("span", { className: "text-sm font-medium", children: [
+                    firstRoom.cancelDeadLine,
+                    " 까지 무료 취소"
+                  ] })
+                ] })
+              }
+            ),
+            /* @__PURE__ */ jsxRuntime.jsx("div", { className: "pt-3 mt-1", children: /* @__PURE__ */ jsxRuntime.jsx("ul", { className: "space-y-2", children: [
+              {
+                icon: /* @__PURE__ */ jsxRuntime.jsx(Utensils, { className: "w-4 h-4 text-gray-500 px-0 py-0" }),
+                benefit: "2인 조식 포함"
+              },
+              {
+                icon: /* @__PURE__ */ jsxRuntime.jsx(CreditCard, { className: "w-4 h-4 text-gray-500" }),
+                benefit: "$100 크레딧 제공"
+              },
+              {
+                icon: /* @__PURE__ */ jsxRuntime.jsx(CircleArrowUp, { className: "w-4 h-4 text-gray-500" }),
+                benefit: "객실 무료 업그레이드 (현장 가능시)"
+              },
+              {
+                icon: /* @__PURE__ */ jsxRuntime.jsx(Clock, { className: "w-4 h-4 text-gray-500" }),
+                benefit: "얼리체크인 & 레이트 체크아웃 (현장 가능시)"
+              }
+            ].map((item, index) => /* @__PURE__ */ jsxRuntime.jsxs(
+              "li",
+              {
+                className: "flex items-center gap-2 text-sm text-gray-600",
+                children: [
+                  typeof item.icon === "string" ? /* @__PURE__ */ jsxRuntime.jsx(
+                    "img",
+                    {
+                      src: item.icon || "/placeholder.svg",
+                      alt: "",
+                      width: 16,
+                      height: 16
+                    }
+                  ) : item.icon,
+                  /* @__PURE__ */ jsxRuntime.jsx("span", { children: item.benefit })
+                ]
+              },
+              index
+            )) }) })
+          ] }) }) }),
+          /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "lg:col-span-2 p-4 sm:p-6 lg:p-8 lg:border-l lg:border-dashed lg:border-gray-300 flex flex-col justify-between h-full lg:pl-12 border-t border-dashed lg:border-t-0", children: [
+            /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "flex flex-row sm:justify-between sm:items-end mb-4 w-full gap-2 justify-between items-end", children: [
+              /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-sm text-gray-500", children: "객실 요금" }),
+              /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "text-left sm:text-right", children: [
+                /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "text-gray-500 hidden sm:block text-left", children: [
+                  nights,
+                  "박 예상결제가"
+                ] }),
+                /* @__PURE__ */ jsxRuntime.jsx("div", { className: "font-bold text-gray-800 text-2xl", children: isLoading || !firstRoom ? /* @__PURE__ */ jsxRuntime.jsx("div", { className: "w-40 h-8 animate-pulse bg-gray-200 rounded-sm" }) : typeof firstRoom === "string" ? firstRoom : `${firstRoom.price.toLocaleString("ko-KR")}원 ~` })
               ] })
-            ] })
-          }
-        ),
-        /* @__PURE__ */ jsxRuntime.jsx("div", { className: "pt-3 mt-1", children: /* @__PURE__ */ jsxRuntime.jsx("ul", { className: "space-y-2", children: [
-          {
-            icon: /* @__PURE__ */ jsxRuntime.jsx(Utensils, { className: "w-4 h-4 text-gray-500 px-0 py-0" }),
-            benefit: "2인 조식 포함"
-          },
-          {
-            icon: /* @__PURE__ */ jsxRuntime.jsx(CreditCard, { className: "w-4 h-4 text-gray-500" }),
-            benefit: "$100 크레딧 제공"
-          },
-          {
-            icon: /* @__PURE__ */ jsxRuntime.jsx(CircleArrowUp, { className: "w-4 h-4 text-gray-500" }),
-            benefit: "객실 무료 업그레이드 (현장 가능시)"
-          },
-          {
-            icon: /* @__PURE__ */ jsxRuntime.jsx(Clock, { className: "w-4 h-4 text-gray-500" }),
-            benefit: "얼리체크인 & 레이트 체크아웃 (현장 가능시)"
-          }
-        ].map((item, index) => /* @__PURE__ */ jsxRuntime.jsxs(
-          "li",
-          {
-            className: "flex items-center gap-2 text-sm text-gray-600",
-            children: [
-              typeof item.icon === "string" ? /* @__PURE__ */ jsxRuntime.jsx(
-                "img",
-                {
-                  src: item.icon || "/placeholder.svg",
-                  alt: "",
-                  width: 16,
-                  height: 16
-                }
-              ) : item.icon,
-              /* @__PURE__ */ jsxRuntime.jsx("span", { children: item.benefit })
-            ]
-          },
-          index
-        )) }) })
-      ] }) }) }),
-      /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "lg:col-span-2 p-4 sm:p-6 lg:p-8 lg:border-l lg:border-dashed lg:border-gray-300 flex flex-col justify-between h-full lg:pl-12 border-t border-dashed", children: [
-        /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "flex flex-row sm:justify-between sm:items-end mb-4 w-full gap-2 justify-between items-end", children: [
-          /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-sm text-gray-500", children: "객실 요금" }),
-          /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "text-left sm:text-right", children: [
-            /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "text-gray-500 text-base hidden sm:block text-left", children: [
-              nights,
-              "박 예상결제가"
             ] }),
-            /* @__PURE__ */ jsxRuntime.jsx("div", { className: "font-bold text-gray-800 text-2xl", children: isLoading || !firstRoom ? /* @__PURE__ */ jsxRuntime.jsx("div", { className: "w-40 h-8 animate-pulse bg-gray-200 rounded-sm" }) : typeof firstRoom === "string" ? firstRoom : `${firstRoom.price.toLocaleString("ko-KR")}원 ~` })
+            /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "w-full text-right space-y-4 mt-auto", children: [
+              /* @__PURE__ */ jsxRuntime.jsx("div", { className: "text-xs text-red-500 text-left sm:text-right", children: /* @__PURE__ */ jsxRuntime.jsx("div", { children: "※ 현장 결제시 환율에 따라 최종 원화 결제 금액이 변동될 수 있습니다." }) }),
+              /* @__PURE__ */ jsxRuntime.jsx(
+                "a",
+                {
+                  href: "https://pf.kakao.com/_cxmxgNG/chat",
+                  className: "inline-block bg-black text-white py-3 px-8 rounded-md hover:bg-gray-800 transition-colors w-full sm:w-auto text-center font-medium",
+                  children: "카카오톡 상담"
+                }
+              )
+            ] })
           ] })
-        ] }),
-        /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "w-full text-right space-y-4 mt-auto", children: [
-          /* @__PURE__ */ jsxRuntime.jsx("div", { className: "text-xs text-red-500 text-left sm:text-right", children: /* @__PURE__ */ jsxRuntime.jsx("div", { children: "※ 현장 결제시 환율에 따라 최종 원화 결제 금액이 변동될 수 있습니다." }) }),
-          /* @__PURE__ */ jsxRuntime.jsx(
-            "a",
-            {
-              href: "https://pf.kakao.com/_cxmxgNG/chat",
-              className: "inline-block bg-black text-white py-3 px-8 rounded-md hover:bg-gray-800 transition-colors w-full sm:w-auto text-center font-medium",
-              children: "카카오톡 상담"
-            }
-          )
         ] })
-      ] })
-    ] })
-  ] });
+      ]
+    }
+  );
 }
 exports.SelectHotelProductItem = SelectHotelProductItem;
 //# sourceMappingURL=select-hotel-product-item.cjs.js.map

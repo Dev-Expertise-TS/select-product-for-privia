@@ -176,7 +176,12 @@ export function SelectHotelProductItem({
   }, [resData]);
 
   return (
-    <div className="border-2 border-[#e5398f] overflow-hidden bg-white shadow-md md:shadow-none rounded-xl">
+    <div className="overflow-hidden bg-white shadow-md md:shadow-none rounded-xl"
+      style={{
+        border: '1px solid #e5398f',
+        marginTop: '30px'
+      }}
+    >
       <header className="bg-[#e5398f] text-white p-3 text-center sm:text-left font-medium">
         {'럭셔리 셀렉트 - 후불 현장 결제'}
       </header>
@@ -258,11 +263,11 @@ export function SelectHotelProductItem({
         </div>
 
         {/* Right Column: Pricing with divider (40%) */}
-        <div className="lg:col-span-2 p-4 sm:p-6 lg:p-8 lg:border-l lg:border-dashed lg:border-gray-300 flex flex-col justify-between h-full lg:pl-12 border-t border-dashed">
+        <div className="lg:col-span-2 p-4 sm:p-6 lg:p-8 lg:border-l lg:border-dashed lg:border-gray-300 flex flex-col justify-between h-full lg:pl-12 border-t border-dashed lg:border-t-0">
           <div className="flex flex-row sm:justify-between sm:items-end mb-4 w-full gap-2 justify-between items-end">
             <span className="text-sm text-gray-500">객실 요금</span>
             <div className="text-left sm:text-right">
-              <div className="text-gray-500 text-base hidden sm:block text-left">
+              <div className="text-gray-500 hidden sm:block text-left">
                 {nights}박 예상결제가
               </div>
               <div className="font-bold text-gray-800 text-2xl">

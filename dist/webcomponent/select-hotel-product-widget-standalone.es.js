@@ -10597,95 +10597,105 @@ function o1({
     } catch {
       y("카카오톡 상담 필요");
     }
-  }, [e]), /* @__PURE__ */ q.jsxs("div", { className: "border-2 border-[#e5398f] overflow-hidden bg-white shadow-md md:shadow-none rounded-xl", children: [
-    /* @__PURE__ */ q.jsx("header", { className: "bg-[#e5398f] text-white p-3 text-center sm:text-left font-medium", children: "럭셔리 셀렉트 - 후불 현장 결제" }),
-    /* @__PURE__ */ q.jsxs("div", { className: "grid grid-cols-1 lg:grid-cols-5 lg:gap-0 items-start justify-stretch", children: [
-      /* @__PURE__ */ q.jsx("div", { className: "lg:col-span-3 p-4 sm:p-6 lg:p-8 lg:pr-4 px-0 py-0", children: /* @__PURE__ */ q.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-3 md:gap-6 items-start", children: /* @__PURE__ */ q.jsxs("div", { className: "sm:col-span-2 flex flex-col gap-3 p-4 md:p-0", children: [
-        /* @__PURE__ */ q.jsx("span", { className: "font-semibold text-blue-600", children: "[후불 현장 결제]" }),
-        f || !i ? /* @__PURE__ */ q.jsx("div", { className: "w-48 h-6 animate-pulse bg-gray-200 rounded-sm" }) : typeof i != "string" && /* @__PURE__ */ q.jsx("span", { className: "font-bold", children: i.hotelName }),
-        /* @__PURE__ */ q.jsx(
-          "div",
-          {
-            className: "flex items-center gap-1.5 text-blue-600",
-            children: f || !i ? /* @__PURE__ */ q.jsx("div", { className: "w-60 h-5 animate-pulse bg-gray-200 rounded-sm" }) : typeof i != "string" && /* @__PURE__ */ q.jsxs(q.Fragment, { children: [
-              /* @__PURE__ */ q.jsx(
-                "img",
-                {
-                  src: "https://static.priviatravel.com/images/front/mtravel/svg/ico-check-blue-circle.svg",
-                  alt: "Free cancellation icon",
-                  width: 20,
-                  height: 20
-                }
-              ),
-              /* @__PURE__ */ q.jsxs("span", { className: "text-sm font-medium", children: [
-                i.cancelDeadLine,
-                " 까지 무료 취소"
+  }, [e]), /* @__PURE__ */ q.jsxs(
+    "div",
+    {
+      className: "overflow-hidden bg-white shadow-md md:shadow-none rounded-xl",
+      style: {
+        border: "1px solid #e5398f",
+        marginTop: "30px"
+      },
+      children: [
+        /* @__PURE__ */ q.jsx("header", { className: "bg-[#e5398f] text-white p-3 text-center sm:text-left font-medium", children: "럭셔리 셀렉트 - 후불 현장 결제" }),
+        /* @__PURE__ */ q.jsxs("div", { className: "grid grid-cols-1 lg:grid-cols-5 lg:gap-0 items-start justify-stretch", children: [
+          /* @__PURE__ */ q.jsx("div", { className: "lg:col-span-3 p-4 sm:p-6 lg:p-8 lg:pr-4 px-0 py-0", children: /* @__PURE__ */ q.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-3 md:gap-6 items-start", children: /* @__PURE__ */ q.jsxs("div", { className: "sm:col-span-2 flex flex-col gap-3 p-4 md:p-0", children: [
+            /* @__PURE__ */ q.jsx("span", { className: "font-semibold text-blue-600", children: "[후불 현장 결제]" }),
+            f || !i ? /* @__PURE__ */ q.jsx("div", { className: "w-48 h-6 animate-pulse bg-gray-200 rounded-sm" }) : typeof i != "string" && /* @__PURE__ */ q.jsx("span", { className: "font-bold", children: i.hotelName }),
+            /* @__PURE__ */ q.jsx(
+              "div",
+              {
+                className: "flex items-center gap-1.5 text-blue-600",
+                children: f || !i ? /* @__PURE__ */ q.jsx("div", { className: "w-60 h-5 animate-pulse bg-gray-200 rounded-sm" }) : typeof i != "string" && /* @__PURE__ */ q.jsxs(q.Fragment, { children: [
+                  /* @__PURE__ */ q.jsx(
+                    "img",
+                    {
+                      src: "https://static.priviatravel.com/images/front/mtravel/svg/ico-check-blue-circle.svg",
+                      alt: "Free cancellation icon",
+                      width: 20,
+                      height: 20
+                    }
+                  ),
+                  /* @__PURE__ */ q.jsxs("span", { className: "text-sm font-medium", children: [
+                    i.cancelDeadLine,
+                    " 까지 무료 취소"
+                  ] })
+                ] })
+              }
+            ),
+            /* @__PURE__ */ q.jsx("div", { className: "pt-3 mt-1", children: /* @__PURE__ */ q.jsx("ul", { className: "space-y-2", children: [
+              {
+                icon: /* @__PURE__ */ q.jsx(f1, { className: "w-4 h-4 text-gray-500 px-0 py-0" }),
+                benefit: "2인 조식 포함"
+              },
+              {
+                icon: /* @__PURE__ */ q.jsx(n1, { className: "w-4 h-4 text-gray-500" }),
+                benefit: "$100 크레딧 제공"
+              },
+              {
+                icon: /* @__PURE__ */ q.jsx(a1, { className: "w-4 h-4 text-gray-500" }),
+                benefit: "객실 무료 업그레이드 (현장 가능시)"
+              },
+              {
+                icon: /* @__PURE__ */ q.jsx(e1, { className: "w-4 h-4 text-gray-500" }),
+                benefit: "얼리체크인 & 레이트 체크아웃 (현장 가능시)"
+              }
+            ].map((r, m) => /* @__PURE__ */ q.jsxs(
+              "li",
+              {
+                className: "flex items-center gap-2 text-sm text-gray-600",
+                children: [
+                  typeof r.icon == "string" ? /* @__PURE__ */ q.jsx(
+                    "img",
+                    {
+                      src: r.icon || "/placeholder.svg",
+                      alt: "",
+                      width: 16,
+                      height: 16
+                    }
+                  ) : r.icon,
+                  /* @__PURE__ */ q.jsx("span", { children: r.benefit })
+                ]
+              },
+              m
+            )) }) })
+          ] }) }) }),
+          /* @__PURE__ */ q.jsxs("div", { className: "lg:col-span-2 p-4 sm:p-6 lg:p-8 lg:border-l lg:border-dashed lg:border-gray-300 flex flex-col justify-between h-full lg:pl-12 border-t border-dashed lg:border-t-0", children: [
+            /* @__PURE__ */ q.jsxs("div", { className: "flex flex-row sm:justify-between sm:items-end mb-4 w-full gap-2 justify-between items-end", children: [
+              /* @__PURE__ */ q.jsx("span", { className: "text-sm text-gray-500", children: "객실 요금" }),
+              /* @__PURE__ */ q.jsxs("div", { className: "text-left sm:text-right", children: [
+                /* @__PURE__ */ q.jsxs("div", { className: "text-gray-500 hidden sm:block text-left", children: [
+                  a,
+                  "박 예상결제가"
+                ] }),
+                /* @__PURE__ */ q.jsx("div", { className: "font-bold text-gray-800 text-2xl", children: f || !i ? /* @__PURE__ */ q.jsx("div", { className: "w-40 h-8 animate-pulse bg-gray-200 rounded-sm" }) : typeof i == "string" ? i : `${i.price.toLocaleString("ko-KR")}원 ~` })
               ] })
-            ] })
-          }
-        ),
-        /* @__PURE__ */ q.jsx("div", { className: "pt-3 mt-1", children: /* @__PURE__ */ q.jsx("ul", { className: "space-y-2", children: [
-          {
-            icon: /* @__PURE__ */ q.jsx(f1, { className: "w-4 h-4 text-gray-500 px-0 py-0" }),
-            benefit: "2인 조식 포함"
-          },
-          {
-            icon: /* @__PURE__ */ q.jsx(n1, { className: "w-4 h-4 text-gray-500" }),
-            benefit: "$100 크레딧 제공"
-          },
-          {
-            icon: /* @__PURE__ */ q.jsx(a1, { className: "w-4 h-4 text-gray-500" }),
-            benefit: "객실 무료 업그레이드 (현장 가능시)"
-          },
-          {
-            icon: /* @__PURE__ */ q.jsx(e1, { className: "w-4 h-4 text-gray-500" }),
-            benefit: "얼리체크인 & 레이트 체크아웃 (현장 가능시)"
-          }
-        ].map((r, m) => /* @__PURE__ */ q.jsxs(
-          "li",
-          {
-            className: "flex items-center gap-2 text-sm text-gray-600",
-            children: [
-              typeof r.icon == "string" ? /* @__PURE__ */ q.jsx(
-                "img",
-                {
-                  src: r.icon || "/placeholder.svg",
-                  alt: "",
-                  width: 16,
-                  height: 16
-                }
-              ) : r.icon,
-              /* @__PURE__ */ q.jsx("span", { children: r.benefit })
-            ]
-          },
-          m
-        )) }) })
-      ] }) }) }),
-      /* @__PURE__ */ q.jsxs("div", { className: "lg:col-span-2 p-4 sm:p-6 lg:p-8 lg:border-l lg:border-dashed lg:border-gray-300 flex flex-col justify-between h-full lg:pl-12 border-t border-dashed", children: [
-        /* @__PURE__ */ q.jsxs("div", { className: "flex flex-row sm:justify-between sm:items-end mb-4 w-full gap-2 justify-between items-end", children: [
-          /* @__PURE__ */ q.jsx("span", { className: "text-sm text-gray-500", children: "객실 요금" }),
-          /* @__PURE__ */ q.jsxs("div", { className: "text-left sm:text-right", children: [
-            /* @__PURE__ */ q.jsxs("div", { className: "text-gray-500 text-base hidden sm:block text-left", children: [
-              a,
-              "박 예상결제가"
             ] }),
-            /* @__PURE__ */ q.jsx("div", { className: "font-bold text-gray-800 text-2xl", children: f || !i ? /* @__PURE__ */ q.jsx("div", { className: "w-40 h-8 animate-pulse bg-gray-200 rounded-sm" }) : typeof i == "string" ? i : `${i.price.toLocaleString("ko-KR")}원 ~` })
+            /* @__PURE__ */ q.jsxs("div", { className: "w-full text-right space-y-4 mt-auto", children: [
+              /* @__PURE__ */ q.jsx("div", { className: "text-xs text-red-500 text-left sm:text-right", children: /* @__PURE__ */ q.jsx("div", { children: "※ 현장 결제시 환율에 따라 최종 원화 결제 금액이 변동될 수 있습니다." }) }),
+              /* @__PURE__ */ q.jsx(
+                "a",
+                {
+                  href: "https://pf.kakao.com/_cxmxgNG/chat",
+                  className: "inline-block bg-black text-white py-3 px-8 rounded-md hover:bg-gray-800 transition-colors w-full sm:w-auto text-center font-medium",
+                  children: "카카오톡 상담"
+                }
+              )
+            ] })
           ] })
-        ] }),
-        /* @__PURE__ */ q.jsxs("div", { className: "w-full text-right space-y-4 mt-auto", children: [
-          /* @__PURE__ */ q.jsx("div", { className: "text-xs text-red-500 text-left sm:text-right", children: /* @__PURE__ */ q.jsx("div", { children: "※ 현장 결제시 환율에 따라 최종 원화 결제 금액이 변동될 수 있습니다." }) }),
-          /* @__PURE__ */ q.jsx(
-            "a",
-            {
-              href: "https://pf.kakao.com/_cxmxgNG/chat",
-              className: "inline-block bg-black text-white py-3 px-8 rounded-md hover:bg-gray-800 transition-colors w-full sm:w-auto text-center font-medium",
-              children: "카카오톡 상담"
-            }
-          )
         ] })
-      ] })
-    ] })
-  ] });
+      ]
+    }
+  );
 }
 typeof window < "u" && (window.React = Tc, window.ReactDOM = Gh);
 const Vd = Fh(o1, {
