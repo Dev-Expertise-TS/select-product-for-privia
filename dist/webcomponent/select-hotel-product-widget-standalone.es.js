@@ -10586,11 +10586,16 @@ function o1({
       const r = e == null ? void 0 : e.roomDescriptions;
       if (!(r != null && r.length) || (r == null ? void 0 : r.length) <= 0)
         throw new Error("no roomDescription");
-      const m = r == null ? void 0 : r.sort((v, b) => ((v == null ? void 0 : v.price) || 0) - (b.price || 0)), d = (m == null ? void 0 : m[4]) || (m == null ? void 0 : m[0]);
+      const m = r == null ? void 0 : r.sort((v, b) => ((v == null ? void 0 : v.price) || 0) - (b.price || 0));
+      if (!(m != null && m.length) || (m == null ? void 0 : m.length) <= 0)
+        throw new Error("failed to sort");
+      const d = (m == null ? void 0 : m[0]) || null;
+      if (d === null)
+        throw new Error("no firstRoom");
       if (typeof (e == null ? void 0 : e.propertyNameKor) != "string" && typeof (e == null ? void 0 : e.propertyNameEng) != "string" || typeof d.price != "number" || typeof d.roomDescription != "string" || typeof d.cancelDeadLine != "string" || !/^\d{8}$/.test(d.cancelDeadLine))
         throw new Error("invalid room description data");
       y({
-        hotelName: e.propertyNameKor || e.propertyNameEng,
+        hotelName: (d == null ? void 0 : d.roomCode) || e.propertyNameKor || e.propertyNameEng,
         ...d,
         cancelDeadLine: d.cancelDeadLine.replace(/^(\d{4})(\d{2})(\d{2})$/, "$1-$2-$3")
       });

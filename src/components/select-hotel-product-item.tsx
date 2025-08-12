@@ -111,7 +111,7 @@ export function SelectHotelProductItem({
 }: SelectHotelProductItemProps) {
   const [resData, setResData] = useState<SabreResponseBody | undefined | null>();
   const [isLoading, setIsLoading] = useState(false);
-  const [fifthRoom, setFifthRoom] = useState<SaberRoomWithHotelName | string | null | undefined>();
+  const [firstRoom, setFirstRoom] = useState<SaberRoomWithHotelName | string | null | undefined>();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -157,22 +157,28 @@ export function SelectHotelProductItem({
         if (!roomDescriptions?.length || roomDescriptions?.length <= 0 )
           throw new Error('no roomDescription');
         const sortedRooms = roomDescriptions?.sort((a, b) => (a?.price || 0) - (b.price || 0))
-        const fifthRoom = sortedRooms?.[4] || sortedRooms?.[0];
+        if (!sortedRooms?.length || sortedRooms?.length <= 0) {
+          throw new Error('failed to sort')
+        }
+        const firstRoom = sortedRooms?.[0] || null;
+        if (firstRoom === null) {
+          throw new Error('no firstRoom')
+        }
         if (
           (typeof resData?.propertyNameKor !== 'string' && typeof resData?.propertyNameEng !== 'string')
-          || typeof fifthRoom.price !== 'number'
-          || typeof fifthRoom.roomDescription !== 'string'
-          || typeof fifthRoom.cancelDeadLine !== 'string'
-          || !/^\d{8}$/.test(fifthRoom.cancelDeadLine)
+          || typeof firstRoom.price !== 'number'
+          || typeof firstRoom.roomDescription !== 'string'
+          || typeof firstRoom.cancelDeadLine !== 'string'
+          || !/^\d{8}$/.test(firstRoom.cancelDeadLine)
         )
           throw new Error('invalid room description data');
-        setFifthRoom({
-          hotelName: resData.propertyNameKor || resData.propertyNameEng,
-          ...fifthRoom,
-          cancelDeadLine: fifthRoom.cancelDeadLine.replace(/^(\d{4})(\d{2})(\d{2})$/, '$1-$2-$3')
+        setFirstRoom({
+          hotelName: firstRoom?.roomCode || resData.propertyNameKor || resData.propertyNameEng,
+          ...firstRoom,
+          cancelDeadLine: firstRoom.cancelDeadLine.replace(/^(\d{4})(\d{2})(\d{2})$/, '$1-$2-$3')
         });
       } catch(err) {
-        setFifthRoom('카카오톡 상담 필요');
+        setFirstRoom('카카오톡 상담 필요');
       }
   }, [resData]);
 
@@ -195,19 +201,19 @@ export function SelectHotelProductItem({
             <div className="sm:col-span-2 flex flex-col gap-3 p-4 md:p-0">
               <span className="font-semibold text-blue-600">{'[후불 현장 결제]'}</span>
               {
-                (isLoading || !fifthRoom) ? (
+                (isLoading || !firstRoom) ? (
                   <div className="w-48 h-6 animate-pulse bg-gray-200 rounded-sm" />
-                ) : typeof fifthRoom !== 'string' && (
-                  <span className="font-bold">{fifthRoom.hotelName}</span>
+                ) : typeof firstRoom !== 'string' && (
+                  <span className="font-bold">{firstRoom.hotelName}</span>
                 ) 
               }
               <div
                 className="flex items-center gap-1.5 text-blue-600"
               >
                 {
-                  (isLoading || !fifthRoom) ? (
+                  (isLoading || !firstRoom) ? (
                     <div className="w-60 h-5 animate-pulse bg-gray-200 rounded-sm" />
-                  ) : typeof fifthRoom !== 'string' && (
+                  ) : typeof firstRoom !== 'string' && (
                     <>
                       <div style={{
                           width: '20px',
@@ -218,7 +224,7 @@ export function SelectHotelProductItem({
                           backgroundSize: 'contain',
                         }}>
                       </div>
-                      <span className="text-sm font-medium">{fifthRoom.cancelDeadLine} 까지 무료 취소</span>
+                      <span className="text-sm font-medium">{firstRoom.cancelDeadLine} 까지 무료 취소</span>
                     </>
                   ) 
                 }
@@ -278,12 +284,12 @@ export function SelectHotelProductItem({
                 {nights}박 예상결제가
               </div>
               <div className="font-bold text-gray-800 text-2xl">
-                {isLoading || !fifthRoom ? (
+                {isLoading || !firstRoom ? (
                   <div className="w-40 h-8 animate-pulse bg-gray-200 rounded-sm" />
-                ) : typeof fifthRoom === 'string' ? (
-                  fifthRoom
+                ) : typeof firstRoom === 'string' ? (
+                  firstRoom
                 ) : (
-                  `${fifthRoom.price.toLocaleString('ko-KR')}원 ~`
+                  `${firstRoom.price.toLocaleString('ko-KR')}원 ~`
                 )}
               </div>
             </div>

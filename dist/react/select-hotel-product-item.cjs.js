@@ -182,7 +182,7 @@ function SelectHotelProductItem({
 }) {
   const [resData, setResData] = react.useState();
   const [isLoading, setIsLoading] = react.useState(false);
-  const [fifthRoom, setFifthRoom] = react.useState();
+  const [firstRoom, setFirstRoom] = react.useState();
   react.useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -223,16 +223,22 @@ function SelectHotelProductItem({
       if (!(roomDescriptions == null ? void 0 : roomDescriptions.length) || (roomDescriptions == null ? void 0 : roomDescriptions.length) <= 0)
         throw new Error("no roomDescription");
       const sortedRooms = roomDescriptions == null ? void 0 : roomDescriptions.sort((a, b) => ((a == null ? void 0 : a.price) || 0) - (b.price || 0));
-      const fifthRoom2 = (sortedRooms == null ? void 0 : sortedRooms[4]) || (sortedRooms == null ? void 0 : sortedRooms[0]);
-      if (typeof (resData == null ? void 0 : resData.propertyNameKor) !== "string" && typeof (resData == null ? void 0 : resData.propertyNameEng) !== "string" || typeof fifthRoom2.price !== "number" || typeof fifthRoom2.roomDescription !== "string" || typeof fifthRoom2.cancelDeadLine !== "string" || !/^\d{8}$/.test(fifthRoom2.cancelDeadLine))
+      if (!(sortedRooms == null ? void 0 : sortedRooms.length) || (sortedRooms == null ? void 0 : sortedRooms.length) <= 0) {
+        throw new Error("failed to sort");
+      }
+      const firstRoom2 = (sortedRooms == null ? void 0 : sortedRooms[0]) || null;
+      if (firstRoom2 === null) {
+        throw new Error("no firstRoom");
+      }
+      if (typeof (resData == null ? void 0 : resData.propertyNameKor) !== "string" && typeof (resData == null ? void 0 : resData.propertyNameEng) !== "string" || typeof firstRoom2.price !== "number" || typeof firstRoom2.roomDescription !== "string" || typeof firstRoom2.cancelDeadLine !== "string" || !/^\d{8}$/.test(firstRoom2.cancelDeadLine))
         throw new Error("invalid room description data");
-      setFifthRoom({
-        hotelName: resData.propertyNameKor || resData.propertyNameEng,
-        ...fifthRoom2,
-        cancelDeadLine: fifthRoom2.cancelDeadLine.replace(/^(\d{4})(\d{2})(\d{2})$/, "$1-$2-$3")
+      setFirstRoom({
+        hotelName: (firstRoom2 == null ? void 0 : firstRoom2.roomCode) || resData.propertyNameKor || resData.propertyNameEng,
+        ...firstRoom2,
+        cancelDeadLine: firstRoom2.cancelDeadLine.replace(/^(\d{4})(\d{2})(\d{2})$/, "$1-$2-$3")
       });
     } catch (err) {
-      setFifthRoom("카카오톡 상담 필요");
+      setFirstRoom("카카오톡 상담 필요");
     }
   }, [resData]);
   return /* @__PURE__ */ jsxRuntime.jsxs(
@@ -248,12 +254,12 @@ function SelectHotelProductItem({
         /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "grid grid-cols-1 lg:grid-cols-5 lg:gap-0 items-start justify-stretch", children: [
           /* @__PURE__ */ jsxRuntime.jsx("div", { className: "lg:col-span-3 p-4 sm:p-6 lg:p-8 lg:pr-4 px-0 py-0", children: /* @__PURE__ */ jsxRuntime.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-3 md:gap-6 items-start", children: /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "sm:col-span-2 flex flex-col gap-3 p-4 md:p-0", children: [
             /* @__PURE__ */ jsxRuntime.jsx("span", { className: "font-semibold text-blue-600", children: "[후불 현장 결제]" }),
-            isLoading || !fifthRoom ? /* @__PURE__ */ jsxRuntime.jsx("div", { className: "w-48 h-6 animate-pulse bg-gray-200 rounded-sm" }) : typeof fifthRoom !== "string" && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "font-bold", children: fifthRoom.hotelName }),
+            isLoading || !firstRoom ? /* @__PURE__ */ jsxRuntime.jsx("div", { className: "w-48 h-6 animate-pulse bg-gray-200 rounded-sm" }) : typeof firstRoom !== "string" && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "font-bold", children: firstRoom.hotelName }),
             /* @__PURE__ */ jsxRuntime.jsx(
               "div",
               {
                 className: "flex items-center gap-1.5 text-blue-600",
-                children: isLoading || !fifthRoom ? /* @__PURE__ */ jsxRuntime.jsx("div", { className: "w-60 h-5 animate-pulse bg-gray-200 rounded-sm" }) : typeof fifthRoom !== "string" && /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
+                children: isLoading || !firstRoom ? /* @__PURE__ */ jsxRuntime.jsx("div", { className: "w-60 h-5 animate-pulse bg-gray-200 rounded-sm" }) : typeof firstRoom !== "string" && /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
                   /* @__PURE__ */ jsxRuntime.jsx("div", { style: {
                     width: "20px",
                     height: "20px",
@@ -263,7 +269,7 @@ function SelectHotelProductItem({
                     backgroundSize: "contain"
                   } }),
                   /* @__PURE__ */ jsxRuntime.jsxs("span", { className: "text-sm font-medium", children: [
-                    fifthRoom.cancelDeadLine,
+                    firstRoom.cancelDeadLine,
                     " 까지 무료 취소"
                   ] })
                 ] })
@@ -317,7 +323,7 @@ function SelectHotelProductItem({
                   nights,
                   "박 예상결제가"
                 ] }),
-                /* @__PURE__ */ jsxRuntime.jsx("div", { className: "font-bold text-gray-800 text-2xl", children: isLoading || !fifthRoom ? /* @__PURE__ */ jsxRuntime.jsx("div", { className: "w-40 h-8 animate-pulse bg-gray-200 rounded-sm" }) : typeof fifthRoom === "string" ? fifthRoom : `${fifthRoom.price.toLocaleString("ko-KR")}원 ~` })
+                /* @__PURE__ */ jsxRuntime.jsx("div", { className: "font-bold text-gray-800 text-2xl", children: isLoading || !firstRoom ? /* @__PURE__ */ jsxRuntime.jsx("div", { className: "w-40 h-8 animate-pulse bg-gray-200 rounded-sm" }) : typeof firstRoom === "string" ? firstRoom : `${firstRoom.price.toLocaleString("ko-KR")}원 ~` })
               ] })
             ] }),
             /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "w-full text-right space-y-4 mt-auto", children: [
