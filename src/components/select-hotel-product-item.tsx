@@ -169,12 +169,11 @@ export function SelectHotelProductItem({
           || typeof firstRoom.price !== 'number'
           || typeof firstRoom.roomDescription !== 'string'
           || typeof firstRoom.cancelDeadLine !== 'string'
-          || !/^\d{8}$/.test(firstRoom.cancelDeadLine)
         )
           throw new Error('invalid room description data');
         setFirstRoom({
-          hotelName: firstRoom?.roomCode || resData.propertyNameKor || resData.propertyNameEng,
           ...firstRoom,
+          hotelName: firstRoom?.roomCode || resData.propertyNameKor || resData.propertyNameEng,
           cancelDeadLine: firstRoom.cancelDeadLine.replace(/^(\d{4})(\d{2})(\d{2})$/, '$1-$2-$3')
         });
       } catch(err) {
@@ -213,7 +212,7 @@ export function SelectHotelProductItem({
                 {
                   (isLoading || !firstRoom) ? (
                     <div className="w-60 h-5 animate-pulse bg-gray-200 rounded-sm" />
-                  ) : typeof firstRoom !== 'string' && (
+                  ) : typeof firstRoom !== 'string' && typeof firstRoom.cancelDeadLine === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(firstRoom.cancelDeadLine) && (
                     <>
                       <div style={{
                           width: '20px',

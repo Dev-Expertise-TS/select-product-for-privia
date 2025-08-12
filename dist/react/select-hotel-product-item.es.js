@@ -228,11 +228,11 @@ function SelectHotelProductItem({
       if (firstRoom2 === null) {
         throw new Error("no firstRoom");
       }
-      if (typeof (resData == null ? void 0 : resData.propertyNameKor) !== "string" && typeof (resData == null ? void 0 : resData.propertyNameEng) !== "string" || typeof firstRoom2.price !== "number" || typeof firstRoom2.roomDescription !== "string" || typeof firstRoom2.cancelDeadLine !== "string" || !/^\d{8}$/.test(firstRoom2.cancelDeadLine))
+      if (typeof (resData == null ? void 0 : resData.propertyNameKor) !== "string" && typeof (resData == null ? void 0 : resData.propertyNameEng) !== "string" || typeof firstRoom2.price !== "number" || typeof firstRoom2.roomDescription !== "string" || typeof firstRoom2.cancelDeadLine !== "string")
         throw new Error("invalid room description data");
       setFirstRoom({
-        hotelName: (firstRoom2 == null ? void 0 : firstRoom2.roomCode) || resData.propertyNameKor || resData.propertyNameEng,
         ...firstRoom2,
+        hotelName: (firstRoom2 == null ? void 0 : firstRoom2.roomCode) || resData.propertyNameKor || resData.propertyNameEng,
         cancelDeadLine: firstRoom2.cancelDeadLine.replace(/^(\d{4})(\d{2})(\d{2})$/, "$1-$2-$3")
       });
     } catch (err) {
@@ -257,7 +257,7 @@ function SelectHotelProductItem({
               "div",
               {
                 className: "flex items-center gap-1.5 text-blue-600",
-                children: isLoading || !firstRoom ? /* @__PURE__ */ jsx("div", { className: "w-60 h-5 animate-pulse bg-gray-200 rounded-sm" }) : typeof firstRoom !== "string" && /* @__PURE__ */ jsxs(Fragment, { children: [
+                children: isLoading || !firstRoom ? /* @__PURE__ */ jsx("div", { className: "w-60 h-5 animate-pulse bg-gray-200 rounded-sm" }) : typeof firstRoom !== "string" && typeof firstRoom.cancelDeadLine === "string" && /^\d{4}-\d{2}-\d{2}$/.test(firstRoom.cancelDeadLine) && /* @__PURE__ */ jsxs(Fragment, { children: [
                   /* @__PURE__ */ jsx("div", { style: {
                     width: "20px",
                     height: "20px",

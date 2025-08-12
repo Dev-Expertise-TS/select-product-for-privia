@@ -10592,11 +10592,11 @@ function o1({
       const d = (m == null ? void 0 : m[0]) || null;
       if (d === null)
         throw new Error("no firstRoom");
-      if (typeof (e == null ? void 0 : e.propertyNameKor) != "string" && typeof (e == null ? void 0 : e.propertyNameEng) != "string" || typeof d.price != "number" || typeof d.roomDescription != "string" || typeof d.cancelDeadLine != "string" || !/^\d{8}$/.test(d.cancelDeadLine))
+      if (typeof (e == null ? void 0 : e.propertyNameKor) != "string" && typeof (e == null ? void 0 : e.propertyNameEng) != "string" || typeof d.price != "number" || typeof d.roomDescription != "string" || typeof d.cancelDeadLine != "string")
         throw new Error("invalid room description data");
       y({
-        hotelName: (d == null ? void 0 : d.roomCode) || e.propertyNameKor || e.propertyNameEng,
         ...d,
+        hotelName: (d == null ? void 0 : d.roomCode) || e.propertyNameKor || e.propertyNameEng,
         cancelDeadLine: d.cancelDeadLine.replace(/^(\d{4})(\d{2})(\d{2})$/, "$1-$2-$3")
       });
     } catch {
@@ -10620,7 +10620,7 @@ function o1({
               "div",
               {
                 className: "flex items-center gap-1.5 text-blue-600",
-                children: f || !i ? /* @__PURE__ */ q.jsx("div", { className: "w-60 h-5 animate-pulse bg-gray-200 rounded-sm" }) : typeof i != "string" && /* @__PURE__ */ q.jsxs(q.Fragment, { children: [
+                children: f || !i ? /* @__PURE__ */ q.jsx("div", { className: "w-60 h-5 animate-pulse bg-gray-200 rounded-sm" }) : typeof i != "string" && typeof i.cancelDeadLine == "string" && /^\d{4}-\d{2}-\d{2}$/.test(i.cancelDeadLine) && /* @__PURE__ */ q.jsxs(q.Fragment, { children: [
                   /* @__PURE__ */ q.jsx("div", { style: {
                     width: "20px",
                     height: "20px",
